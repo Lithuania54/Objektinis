@@ -21,13 +21,23 @@ bool tinkami(const string &name)
     return true;
 }
 
+void resizeArray(Studentas *&array, int &capacity)
+{
+    Studentas *temp = new Studentas[capacity * 2];
+    for (int i = 0; i < capacity; i++)
+    {
+        temp[i] = array[i];
+    }
+    delete[] array;
+    array = temp;
+    capacity *= 2;
+}
+
 int main()
 {
     double vidurkis = 0;
-    int minusiukai = 80, stop, kiekis = 0;
-    Studentas Masyvas[1000];
-
-
+    int minusiukai = 80, stop, kiekis = 0, capacity = 10;
+    Studentas *Masyvas = new Studentas[capacity];
 
     while (true)
     {
@@ -37,90 +47,96 @@ int main()
         {
             if (stop == 1)
             {
-                int kelintas = 0;
+                if (kiekis == capacity)
+                {
+                    resizeArray(Masyvas, capacity);
+                }
                 do
                 {
 
                     do
                     {
                         std::cout << "Iveskite varda (arba 'done', jei norite baigti): ";
-                        cin >> Masyvas[kelintas].vardas;
-                        if (!tinkami(Masyvas[kelintas].vardas))
+                        cin >> Masyvas[kiekis].vardas;
+                        if (!tinkami(Masyvas[kiekis].vardas))
                         {
                             std::cout << "Vardas turi buti sudarytas tik is raidziu. Bandykite dar karta." << endl;
                         }
-                    } while (!tinkami(Masyvas[kelintas].vardas));
-                    if(Masyvas[kelintas].vardas=="done") break;
-
-                    kiekis++;
+                    } while (!tinkami(Masyvas[kiekis].vardas));
+                    if (Masyvas[kiekis].vardas == "done")
+                        break;
 
                     do
                     {
                         std::cout << "Iveskite pavarde: ";
-                        cin >> Masyvas[kelintas].pavarde;
-                        if (!tinkami(Masyvas[kelintas].pavarde))
+                        cin >> Masyvas[kiekis].pavarde;
+                        if (!tinkami(Masyvas[kiekis].pavarde))
                         {
                             std::cout << "Pavarde turi buti sudaryta tik is raidziu. Bandykite dar karta." << endl;
                         }
-                    } while (!tinkami(Masyvas[kelintas].pavarde));
+                    } while (!tinkami(Masyvas[kiekis].pavarde));
 
                     int j = 0;
                     int pazymiukiekis = 1;
-                    Masyvas[kelintas].pazymiai = new int[pazymiukiekis];
+                    Masyvas[kiekis].pazymiai = new int[pazymiukiekis];
 
                     do
                     {
                         std::cout << "Iveskite pazymius (kai baigsite, parasykite -1): ";
-                        int x; 
+                        int x;
                         cin >> x;
-                        if(x==-1) break; 
-                        if (x< 0 || x > 10)
+                        if (x == -1)
+                            break;
+                        if (x < 0 || x > 10)
                         {
                             std::cout << "Neatitinka desimbales sistemos. Bandykite dar karta." << endl;
                         }
-                        else{
-                            Masyvas[kelintas].pazymiai[j]=x;
+                        else
+                        {
+                            Masyvas[kiekis].pazymiai[j] = x;
                             j++;
                         }
-                        if(j==pazymiukiekis){
-                            pazymiukiekis +=1; 
-                            int * laikinas = new int[pazymiukiekis];
-                            for(int i=0;i<j; i++){
-                                laikinas[i] = Masyvas[kelintas].pazymiai[i];
+                        if (j == pazymiukiekis)
+                        {
+                            pazymiukiekis += 1;
+                            int *laikinas = new int[pazymiukiekis];
+                            for (int i = 0; i < j; i++)
+                            {
+                                laikinas[i] = Masyvas[kiekis].pazymiai[i];
                             }
-                            delete [] Masyvas[kelintas].pazymiai;
-                            Masyvas[kelintas].pazymiai = laikinas; 
+                            delete[] Masyvas[kiekis].pazymiai;
+                            Masyvas[kiekis].pazymiai = laikinas;
                         }
-                        
+
                     } while (true);
 
                     do
                     {
                         std::cout << "Iveskite egzamino rezultata: ";
 
-                        cin >> Masyvas[kelintas].egzaminorez;
-                        if (Masyvas[kelintas].egzaminorez < 0 || Masyvas[kelintas].egzaminorez > 10)
+                        cin >> Masyvas[kiekis].egzaminorez;
+                        if (Masyvas[kiekis].egzaminorez < 0 || Masyvas[kiekis].egzaminorez > 10)
                         {
                             std::cout << "Neatitinka desimbales sistemos. Bandykite dar karta." << endl;
                         }
-                    } while (Masyvas[kelintas].egzaminorez > 10 || Masyvas[kelintas].egzaminorez < 0);
+                    } while (Masyvas[kiekis].egzaminorez > 10 || Masyvas[kiekis].egzaminorez < 0);
 
-                    vidurkis = 1.0* accumulate(Masyvas[kelintas].pazymiai, Masyvas[kelintas].pazymiai + pazymiukiekis, 0) / pazymiukiekis;
-                    Masyvas[kelintas].galutinis = 0.4 * vidurkis + 0.6 * Masyvas[kelintas].egzaminorez;
+                    vidurkis = 1.0 * accumulate(Masyvas[kiekis].pazymiai, Masyvas[kiekis].pazymiai + j, 0) / j;
+                    Masyvas[kiekis].galutinis = 0.4 * vidurkis + 0.6 * Masyvas[kiekis].egzaminorez;
 
-                    sort(Masyvas[kelintas].pazymiai, Masyvas[kelintas].pazymiai + pazymiukiekis);
+                    sort(Masyvas[kiekis].pazymiai, Masyvas[kiekis].pazymiai + j);
 
-                    if (pazymiukiekis % 2 == 0)
+                    if (j % 2 == 0)
                     {
-                        Masyvas[kelintas].mediana = (Masyvas[kelintas].pazymiai[pazymiukiekis / 2] + Masyvas[kelintas].pazymiai[(pazymiukiekis / 2) - 1]) / 2.0;
+                        Masyvas[kiekis].mediana = (Masyvas[kiekis].pazymiai[j / 2] + Masyvas[kiekis].pazymiai[(j / 2) - 1]) / 2.0;
                     }
                     else
                     {
-                        Masyvas[kelintas].mediana = Masyvas[kelintas].pazymiai[pazymiukiekis / 2];
+                        Masyvas[kiekis].mediana = Masyvas[kiekis].pazymiai[j / 2];
                     }
 
-                    kelintas++;
-                } while (Masyvas[kelintas].vardas != "done");
+                    kiekis++;
+                } while (Masyvas[kiekis].vardas != "done");
             }
         }
         else
@@ -154,5 +170,13 @@ int main()
         std::cout.width(23);
         std::cout << left << fixed << setprecision(2) << Masyvas[i].mediana << endl;
     }
-    return 0; 
+
+    for (int i = 0; i < kiekis; ++i)
+    {
+        delete[] Masyvas[i].pazymiai;
+    }
+
+    delete[] Masyvas;
+
+    return 0;
 }
