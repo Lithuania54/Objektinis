@@ -97,7 +97,7 @@ int main()
                     {
                         std::cout << "Iveskite pazymius (kai baigsite, parasykite -1): ";
                         int x;
-                        if (cin >> x && (x >= 0 && x <= 10 || x == -1))
+                        if (cin >> x && (x > 0 && x <= 10 || x == -1))
                         {
                             if (x == -1)
                             {
@@ -129,12 +129,20 @@ int main()
                     {
                         std::cout << "Iveskite egzamino rezultata: ";
 
-                        cin >> Masyvas[kiekis].egzaminorez;
-                        if (Masyvas[kiekis].egzaminorez < 0 || Masyvas[kiekis].egzaminorez > 10)
+                        if (cin >> Masyvas[kiekis].egzaminorez && (Masyvas[kiekis].egzaminorez > 0 && Masyvas[kiekis].egzaminorez <= 10))
+                        {
+                            if (Masyvas[kiekis].egzaminorez < 0 || Masyvas[kiekis].egzaminorez > 10)
+                            {
+                                std::cout << "Neatitinka desimbales sistemos. Bandykite dar karta." << endl;
+                            }
+                        }
+                        else
                         {
                             std::cout << "Neatitinka desimbales sistemos. Bandykite dar karta." << endl;
+                            cin.clear();
+                            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                         }
-                    } while (Masyvas[kiekis].egzaminorez > 10 || Masyvas[kiekis].egzaminorez < 0);
+                    } while (true);
 
                     vidurkis = 1.0 * accumulate(Masyvas[kiekis].pazymiai, Masyvas[kiekis].pazymiai + j, 0) / j;
                     Masyvas[kiekis].galutinis = 0.4 * vidurkis + 0.6 * Masyvas[kiekis].egzaminorez;
