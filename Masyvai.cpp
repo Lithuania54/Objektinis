@@ -97,30 +97,32 @@ int main()
                     {
                         std::cout << "Iveskite pazymius (kai baigsite, parasykite -1): ";
                         int x;
-                        cin >> x;
-                        if (x == -1)
-                            break;
-                        if (x < 0 || x > 10)
+                        if (cin >> x && (x >= 0 && x <= 10 || x == -1))
                         {
-                            std::cout << "Neatitinka desimbales sistemos. Bandykite dar karta." << endl;
+                            if (x == -1)
+                            {
+                                break;
+                            }
+                            Masyvas[kiekis].pazymiai[j] = x;
+                            j++;
+                            if (j == pazymiukiekis)
+                            {
+                                pazymiukiekis += 1;
+                                int *laikinas = new int[pazymiukiekis];
+                                for (int i = 0; i < j; i++)
+                                {
+                                    laikinas[i] = Masyvas[kiekis].pazymiai[i];
+                                }
+                                delete[] Masyvas[kiekis].pazymiai;
+                                Masyvas[kiekis].pazymiai = laikinas;
+                            }
                         }
                         else
                         {
-                            Masyvas[kiekis].pazymiai[j] = x;
-                            j++;
+                            std::cout << "Neatitinka desimbales sistemos. Bandykite dar karta." << endl;
+                            cin.clear();
+                            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                         }
-                        if (j == pazymiukiekis)
-                        {
-                            pazymiukiekis += 1;
-                            int *laikinas = new int[pazymiukiekis];
-                            for (int i = 0; i < j; i++)
-                            {
-                                laikinas[i] = Masyvas[kiekis].pazymiai[i];
-                            }
-                            delete[] Masyvas[kiekis].pazymiai;
-                            Masyvas[kiekis].pazymiai = laikinas;
-                        }
-
                     } while (true);
 
                     do
@@ -151,6 +153,70 @@ int main()
                     kiekis++;
                 } while (Masyvas[kiekis].vardas != "done");
             }
+
+            else if (stop == 2)
+            {
+                if (kiekis == capacity)
+                {
+                    resizeArray(Masyvas, capacity);
+                }
+
+                do
+                {
+                    std::cout << "Iveskite varda (arba 'done', jei norite baigti): ";
+                    cin >> Masyvas[kiekis].vardas;
+                    if (!tinkami(Masyvas[kiekis].vardas))
+                    {
+                        std::cout << "Vardas turi buti sudarytas tik is raidziu. Bandykite dar karta." << endl;
+                    }
+                } while (!tinkami(Masyvas[kiekis].vardas));
+                if (Masyvas[kiekis].vardas == "done")
+                    break;
+
+                do
+                {
+                    std::cout << "Iveskite pavarde: ";
+                    cin >> Masyvas[kiekis].pavarde;
+                    if (!tinkami(Masyvas[kiekis].pavarde))
+                    {
+                        std::cout << "Pavarde turi buti sudaryta tik is raidziu. Bandykite dar karta." << endl;
+                    }
+                } while (!tinkami(Masyvas[kiekis].pavarde));
+
+                int j = 0;
+                int pazymiukiekis = 1;
+                Masyvas[kiekis].pazymiai = new int[pazymiukiekis];
+                for (int i = 0; i < 10; i++)
+                {
+                    Masyvas[kiekis].pazymiai[j] = rand() % 11;
+                    j++;
+                    if (j == pazymiukiekis)
+                    {
+                        pazymiukiekis += 1;
+                        int *laikinas = new int[pazymiukiekis];
+                        for (int i = 0; i < j; i++)
+                        {
+                            laikinas[i] = Masyvas[kiekis].pazymiai[i];
+                        }
+                        delete[] Masyvas[kiekis].pazymiai;
+                        Masyvas[kiekis].pazymiai = laikinas;
+                    }
+                }
+                Masyvas[kiekis].egzaminorez = rand() % 11;
+                vidurkis = 1.0 * accumulate(Masyvas[kiekis].pazymiai, Masyvas[kiekis].pazymiai + j, 0) / j;
+                Masyvas[kiekis].galutinis = 0.4 * vidurkis + 0.6 * Masyvas[kiekis].egzaminorez;
+                sort(Masyvas[kiekis].pazymiai, Masyvas[kiekis].pazymiai + j);
+                if (j % 2 == 0)
+                {
+                    Masyvas[kiekis].mediana = (Masyvas[kiekis].pazymiai[j / 2] + Masyvas[kiekis].pazymiai[(j / 2) - 1]) / 2.0;
+                }
+                else
+                {
+                    Masyvas[kiekis].mediana = Masyvas[kiekis].pazymiai[j / 2];
+                }
+                kiekis++;
+            }
+
             else if (stop == 3)
             {
                 if (kiekis == capacity)
