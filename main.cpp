@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include <numeric>
+#include <cctype>
 using namespace std;
 
 struct Studentas
@@ -8,6 +9,15 @@ struct Studentas
     int kiekis, egzaminorez, pazymiai[100];
     double galutinis, mediana;
 };
+
+bool tinkami(const string &name) {
+    for (char ch : name) {
+        if (!isalpha(ch)) {
+            return false;
+        }
+    }
+    return true;
+}
 
 int main()
 {
@@ -21,10 +31,25 @@ int main()
 
         for (int i = 0; i < n; i++)
         {
-            cout << "Iveskite varda: ";
-            cin >> Masyvas[i].vardas;
-            cout << "Iveskite pavarde: ";
-            cin >> Masyvas[i].pavarde;
+            do
+            {
+                cout << "Iveskite varda: ";
+                cin >> Masyvas[i].vardas;
+                if (!tinkami(Masyvas[i].vardas))
+                {
+                    cout << "Vardas turi buti sudarytas tik is raidziu. Bandykite dar karta." << endl;
+                }
+            } while (!tinkami(Masyvas[i].vardas));
+
+            do
+            {
+                cout << "Iveskite pavarde: ";
+                cin >> Masyvas[i].pavarde;
+                if (!tinkami(Masyvas[i].pavarde))
+                {
+                    cout << "Pavarde turi buti sudaryta tik is raidziu. Bandykite dar karta." << endl;
+                }
+            } while (!tinkami(Masyvas[i].pavarde));
 
             do
             {
@@ -59,7 +84,7 @@ int main()
                     cout << "Neatitinka desimbales sistemos. Bandykite dar karta." << endl;
                 }
             } while (Masyvas[i].egzaminorez > 10 || Masyvas[i].egzaminorez < 0);
-            
+
             vidurkis = accumulate(Masyvas[i].pazymiai, Masyvas[i].pazymiai + Masyvas[i].kiekis, 0) / Masyvas[i].kiekis;
             Masyvas[i].galutinis = 0.4 * vidurkis + 0.6 * Masyvas[i].egzaminorez;
 
