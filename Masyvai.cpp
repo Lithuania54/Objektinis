@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <random>
 
 using namespace std;
 
@@ -31,6 +32,18 @@ void resizeArray(Studentas *&array, int &capacity)
     delete[] array;
     array = temp;
     capacity *= 2;
+}
+
+string generateRandomString(int length)
+{
+    string possibleCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    string randomString = "";
+    srand(time(0)); // seed the random number generator
+    for (int i = 0; i < length; i++)
+    {
+        randomString += possibleCharacters[rand() % possibleCharacters.size()];
+    }
+    return randomString;
 }
 
 int main()
@@ -137,6 +150,47 @@ int main()
 
                     kiekis++;
                 } while (Masyvas[kiekis].vardas != "done");
+            }
+            else if (stop == 3)
+            {
+                if (kiekis == capacity)
+                {
+                    resizeArray(Masyvas, capacity);
+                }
+                Masyvas[kiekis].vardas = generateRandomString(10);
+                Masyvas[kiekis].pavarde = generateRandomString(10);
+                int j = 0;
+                int pazymiukiekis = 1;
+                Masyvas[kiekis].pazymiai = new int[pazymiukiekis];
+                for (int i = 0; i < 10; i++)
+                {
+                    Masyvas[kiekis].pazymiai[j] = rand() % 11;
+                    j++;
+                    if (j == pazymiukiekis)
+                    {
+                        pazymiukiekis += 1;
+                        int *laikinas = new int[pazymiukiekis];
+                        for (int i = 0; i < j; i++)
+                        {
+                            laikinas[i] = Masyvas[kiekis].pazymiai[i];
+                        }
+                        delete[] Masyvas[kiekis].pazymiai;
+                        Masyvas[kiekis].pazymiai = laikinas;
+                    }
+                }
+                Masyvas[kiekis].egzaminorez = rand() % 11;
+                vidurkis = 1.0 * accumulate(Masyvas[kiekis].pazymiai, Masyvas[kiekis].pazymiai + j, 0) / j;
+                Masyvas[kiekis].galutinis = 0.4 * vidurkis + 0.6 * Masyvas[kiekis].egzaminorez;
+                sort(Masyvas[kiekis].pazymiai, Masyvas[kiekis].pazymiai + j);
+                if (j % 2 == 0)
+                {
+                    Masyvas[kiekis].mediana = (Masyvas[kiekis].pazymiai[j / 2] + Masyvas[kiekis].pazymiai[(j / 2) - 1]) / 2.0;
+                }
+                else
+                {
+                    Masyvas[kiekis].mediana = Masyvas[kiekis].pazymiai[j / 2];
+                }
+                kiekis++;
             }
         }
         else
