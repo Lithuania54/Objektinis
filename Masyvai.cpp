@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include <random>
 
 using namespace std;
 
@@ -22,7 +21,7 @@ bool tinkami(const string &name)
     return true;
 }
 
-void resizeArray(Studentas *&array, int &capacity)
+void resize(Studentas *&array, int &capacity)
 {
     Studentas *temp = new Studentas[capacity * 2];
     for (int i = 0; i < capacity; i++)
@@ -34,12 +33,14 @@ void resizeArray(Studentas *&array, int &capacity)
     capacity *= 2;
 }
 
-string generateRandomString(int length)
+string RandomString(int ilgis)
 {
     string possibleCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     string randomString = "";
-    srand(time(0)); // seed the random number generator
-    for (int i = 0; i < length; i++)
+
+    srand(time(0));
+
+    for (int i = 0; i < ilgis; i++)
     {
         randomString += possibleCharacters[rand() % possibleCharacters.size()];
     }
@@ -58,11 +59,18 @@ int main()
         std::cin >> stop;
         if (stop < 4)
         {
+            if (cin.fail())
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Iveskite skaiciu. Pasirinkite skaiciu nuo 1 iki 4." << endl;
+                continue;
+            }
             if (stop == 1)
             {
                 if (kiekis == capacity)
                 {
-                    resizeArray(Masyvas, capacity);
+                    resize(Masyvas, capacity);
                 }
                 do
                 {
@@ -134,6 +142,12 @@ int main()
                             if (Masyvas[kiekis].egzaminorez < 0 || Masyvas[kiekis].egzaminorez > 10)
                             {
                                 std::cout << "Neatitinka desimbales sistemos. Bandykite dar karta." << endl;
+                                cin.clear();
+                                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                            }
+                            else
+                            {
+                                break;
                             }
                         }
                         else
@@ -166,7 +180,7 @@ int main()
             {
                 if (kiekis == capacity)
                 {
-                    resizeArray(Masyvas, capacity);
+                    resize(Masyvas, capacity);
                 }
 
                 do
@@ -179,7 +193,9 @@ int main()
                     }
                 } while (!tinkami(Masyvas[kiekis].vardas));
                 if (Masyvas[kiekis].vardas == "done")
+                {
                     break;
+                }
 
                 do
                 {
@@ -193,7 +209,9 @@ int main()
 
                 int j = 0;
                 int pazymiukiekis = 1;
+
                 Masyvas[kiekis].pazymiai = new int[pazymiukiekis];
+
                 for (int i = 0; i < 10; i++)
                 {
                     Masyvas[kiekis].pazymiai[j] = rand() % 11;
@@ -210,10 +228,12 @@ int main()
                         Masyvas[kiekis].pazymiai = laikinas;
                     }
                 }
+
                 Masyvas[kiekis].egzaminorez = rand() % 11;
                 vidurkis = 1.0 * accumulate(Masyvas[kiekis].pazymiai, Masyvas[kiekis].pazymiai + j, 0) / j;
                 Masyvas[kiekis].galutinis = 0.4 * vidurkis + 0.6 * Masyvas[kiekis].egzaminorez;
                 sort(Masyvas[kiekis].pazymiai, Masyvas[kiekis].pazymiai + j);
+
                 if (j % 2 == 0)
                 {
                     Masyvas[kiekis].mediana = (Masyvas[kiekis].pazymiai[j / 2] + Masyvas[kiekis].pazymiai[(j / 2) - 1]) / 2.0;
@@ -229,13 +249,17 @@ int main()
             {
                 if (kiekis == capacity)
                 {
-                    resizeArray(Masyvas, capacity);
+                    resize(Masyvas, capacity);
                 }
-                Masyvas[kiekis].vardas = generateRandomString(10);
-                Masyvas[kiekis].pavarde = generateRandomString(10);
+
+                Masyvas[kiekis].vardas = RandomString(10);
+                Masyvas[kiekis].pavarde = RandomString(10);
+
                 int j = 0;
                 int pazymiukiekis = 1;
+
                 Masyvas[kiekis].pazymiai = new int[pazymiukiekis];
+
                 for (int i = 0; i < 10; i++)
                 {
                     Masyvas[kiekis].pazymiai[j] = rand() % 11;
@@ -252,10 +276,12 @@ int main()
                         Masyvas[kiekis].pazymiai = laikinas;
                     }
                 }
+
                 Masyvas[kiekis].egzaminorez = rand() % 11;
                 vidurkis = 1.0 * accumulate(Masyvas[kiekis].pazymiai, Masyvas[kiekis].pazymiai + j, 0) / j;
                 Masyvas[kiekis].galutinis = 0.4 * vidurkis + 0.6 * Masyvas[kiekis].egzaminorez;
                 sort(Masyvas[kiekis].pazymiai, Masyvas[kiekis].pazymiai + j);
+
                 if (j % 2 == 0)
                 {
                     Masyvas[kiekis].mediana = (Masyvas[kiekis].pazymiai[j / 2] + Masyvas[kiekis].pazymiai[(j / 2) - 1]) / 2.0;
@@ -267,9 +293,13 @@ int main()
                 kiekis++;
             }
         }
-        else
+        else if (stop == 4)
         {
             break;
+        }
+        else
+        {
+            cout << "Pasirinkite skaiciu nuo 1 iki 4" << endl;
         }
     }
 
