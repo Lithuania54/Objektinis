@@ -44,9 +44,9 @@ int main()
     while (true)
     {
         Studentas s;
-        std::cout << "1. - ranka\n2. - generuoti pazymius\n3. - generuoti ir pazymius ir studentu vardus, pavardes\n4. - baigti darba" << endl;
+        std::cout << "1. - ranka\n2. - generuoti pazymius\n3. - generuoti ir pazymius ir studentu vardus, pavardes\n4. - skaityti is failo\n5. - baigti darba" << endl;
         std::cin >> stop;
-        if (stop < 4)
+        if (stop < 5)
         {
             if (cin.fail())
             {
@@ -245,17 +245,50 @@ int main()
 
                 kiekis++;
             }
+
+            else if (stop == 4)
+            {
+                string line;
+
+                ifstream fd("studentai1000.txt");
+
+                while (getline(fd, line))
+                {
+                    stringstream ss(line);
+                    Studentas s;
+                    ss >> s.vardas >> s.pavarde;
+
+                    int pazymys;
+                    while (ss >> pazymys)
+                    {
+                        if (ss.peek() == '\n' || ss.eof())
+                        {
+                            s.egzaminorez = pazymys;
+                            break;
+                        }
+                        else
+                        {
+                            s.pazymiai.push_back(pazymys);
+                        }
+                    }
+
+                    studentai.push_back(s);
+                }
+                fd.close();
+            }
         }
-        else if (stop == 4)
+        if (stop != 5)
+        {
+            studentai.push_back(s);
+        }
+        if (stop == 5)
         {
             break;
         }
-        else
+        if (stop > 5 || stop < 1)
         {
-            cout << "Pasirinkite nuo 1 iki 4" << endl;
+            cout << "Pasirinkite nuo 1 iki 5" << endl;
         }
-        if (stop != 4)
-            studentai.push_back(s);
     }
 
     std::cout.width(15);
