@@ -246,33 +246,44 @@ int main()
                 kiekis++;
             }
 
-            else if (stop == 4)
+            if (stop == 4)
             {
+                ifstream fd("studentai10000.txt");
                 string line;
+                std::stringstream buffer;
+                buffer << fd.rdbuf();
 
-                ifstream fd("studentai1000.txt");
-
-                while (getline(fd, line))
+                while (!buffer.eof())
                 {
+                    getline(buffer, line);
                     stringstream ss(line);
                     Studentas s;
                     ss >> s.vardas >> s.pavarde;
-
                     int pazymys;
                     while (ss >> pazymys)
                     {
-                        if (ss.peek() == '\n' || ss.eof())
-                        {
-                            s.egzaminorez = pazymys;
-                            break;
-                        }
-                        else
+                        if (ss.peek() == ' ' || ss.peek() == '\n' || ss.eof())
                         {
                             s.pazymiai.push_back(pazymys);
                         }
                     }
+                    s.egzaminorez = s.pazymiai.back(); // Assuming the last grade is the exam result
+                    s.pazymiai.pop_back();             // Remove the exam grade from pazymiai
 
-                    studentai.push_back(s);
+                    // Calculate average, median, and final grade
+                    vidurkis = accumulate(s.pazymiai.begin(), s.pazymiai.end(), 0.0) / s.pazymiai.size();
+                    s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
+
+                    sort(s.pazymiai.begin(), s.pazymiai.end());
+                    int j = s.pazymiai.size() / 2;
+                    if (j % 2 == 0)
+                    {
+                        return (s.pazymiai[j / 2 - 1] + s.pazymiai[j / 2]) / 2.0;
+                    }
+                    else
+                    {
+                        return s.pazymiai[j / 2];
+                    }
                 }
                 fd.close();
             }
