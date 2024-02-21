@@ -298,8 +298,33 @@ int main()
             if (kiekis > 0)
             {
                 int pasirinkimas;
-                cout << "Rusiavimas: 1 - Vardas, 2 - Pavarde, 3 - Galutinis vidurkis, 4 - Galutinis mediana"<<endl;
-                cin >> pasirinkimas;
+                cout << "Rusiavimas: 1 - Vardas, 2 - Pavarde, 3 - Galutinis vidurkis, 4 - Galutinis mediana" << endl;
+                while (!(cin >> pasirinkimas) || pasirinkimas < 1 || pasirinkimas > 5)
+                {
+                    cin.clear();
+                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    cout << "Pasirinkti is: 1 - Vardas, 2 - Pavarde, 3 - Galutinis vidurkis, 4 - Galutinis mediana\n";
+                }
+                switch (pasirinkimas)
+                {
+                case 1:
+                    sort(studentai.begin(), studentai.end(), [](Studentas &a, Studentas &b)
+                         { return a.vardas < b.vardas; });
+                    break;
+                case 2:
+                    sort(studentai.begin(), studentai.end(), [](Studentas &a, Studentas &b)
+                         { return a.pavarde < b.pavarde; });
+                    break;
+                case 3:
+                    sort(studentai.begin(), studentai.end(), [](Studentas &a, Studentas &b)
+                         { return a.galutinis < b.galutinis; });
+                    break;
+                case 4:
+                    sort(studentai.begin(), studentai.end(), [](Studentas &a, Studentas &b)
+                         { return a.mediana < b.mediana; });
+                    break;
+                }
+                break;
             }
             else
             {
