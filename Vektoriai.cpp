@@ -36,7 +36,6 @@ string RandomString(int ilgis)
 
 int main()
 {
-    srand(time(0));
     double vidurkis = 0;
     int minusiukai = 80, stop, kiekis = 0;
     vector<Studentas> studentai;
@@ -256,16 +255,19 @@ int main()
 
                 while (getline(buffer, line))
                 {
-                    stringstream ss(line);
+                    stringstream read(line);
+
                     Studentas s;
-                    ss >> s.vardas >> s.pavarde;
+                    read >> s.vardas >> s.pavarde;
                     int pazymys;
                     kiekis++;
-                    while (ss >> pazymys)
+
+                    while (read >> pazymys)
                     {
                         if (pazymys >= 1 && pazymys <= 10)
                             s.pazymiai.push_back(pazymys);
                     }
+
                     s.egzaminorez = s.pazymiai.back();
                     s.pazymiai.pop_back();
 
@@ -274,6 +276,7 @@ int main()
 
                     std::sort(s.pazymiai.begin(), s.pazymiai.end());
                     int j = s.pazymiai.size();
+                    
                     if (j % 2 == 0)
                     {
                         s.mediana = (s.pazymiai[j / 2 - 1] + s.pazymiai[j / 2]) / 2.0;
