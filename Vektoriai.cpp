@@ -52,7 +52,7 @@ int main()
             {
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                cout << "Iveskite skaiciu. Pasirinkite skaiciu nuo 1 iki 4." << endl;
+                cout << "Iveskite skaiciu. Pasirinkite skaiciu nuo 1 iki 5." << endl;
                 continue;
             }
             if (stop == 1)
@@ -252,6 +252,7 @@ int main()
                 string line;
                 std::stringstream buffer;
                 buffer << fd.rdbuf();
+
                 getline(buffer, line);
 
                 while (getline(buffer, line))
@@ -260,13 +261,14 @@ int main()
                     Studentas s;
                     ss >> s.vardas >> s.pavarde;
                     int pazymys;
+                    kiekis++;
                     while (ss >> pazymys)
                     {
                         if (pazymys >= 1 && pazymys <= 10)
                             s.pazymiai.push_back(pazymys);
                     }
                     s.egzaminorez = s.pazymiai.back();
-                    s.pazymiai.pop_back();          
+                    s.pazymiai.pop_back();
 
                     double vidurkis = accumulate(s.pazymiai.begin(), s.pazymiai.end(), 0.0) / s.pazymiai.size();
                     s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
@@ -274,9 +276,13 @@ int main()
                     sort(s.pazymiai.begin(), s.pazymiai.end());
                     int j = s.pazymiai.size();
                     if (j % 2 == 0)
+                    {
                         s.mediana = (s.pazymiai[j / 2 - 1] + s.pazymiai[j / 2]) / 2.0;
+                    }
                     else
+                    {
                         s.mediana = s.pazymiai[j / 2];
+                    }
 
                     studentai.push_back(s);
                 }
@@ -289,7 +295,16 @@ int main()
         }
         if (stop == 5)
         {
-            break;
+            if (kiekis > 0)
+            {
+                int pasirinkimas;
+                cout << "Rusiavimas: 1 - Vardas, 2 - Pavarde, 3 - Galutinis vidurkis, 4 - Galutinis mediana"<<endl;
+                cin >> pasirinkimas;
+            }
+            else
+            {
+                break;
+            }
         }
         if (stop > 5 || stop < 1)
         {
