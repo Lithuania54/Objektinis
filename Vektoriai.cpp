@@ -248,42 +248,37 @@ int main()
 
             if (stop == 4)
             {
-                ifstream fd("studentai10000.txt");
+                std::ifstream fd("studentai10000.txt");
                 string line;
                 std::stringstream buffer;
                 buffer << fd.rdbuf();
+                getline(buffer, line);
 
-                while (!buffer.eof())
+                while (getline(buffer, line))
                 {
-                    getline(buffer, line);
                     stringstream ss(line);
                     Studentas s;
                     ss >> s.vardas >> s.pavarde;
                     int pazymys;
                     while (ss >> pazymys)
                     {
-                        if (ss.peek() == ' ' || ss.peek() == '\n' || ss.eof())
-                        {
+                        if (pazymys >= 1 && pazymys <= 10)
                             s.pazymiai.push_back(pazymys);
-                        }
                     }
-                    s.egzaminorez = s.pazymiai.back(); // Assuming the last grade is the exam result
-                    s.pazymiai.pop_back();             // Remove the exam grade from pazymiai
+                    s.egzaminorez = s.pazymiai.back();
+                    s.pazymiai.pop_back();          
 
-                    // Calculate average, median, and final grade
-                    vidurkis = accumulate(s.pazymiai.begin(), s.pazymiai.end(), 0.0) / s.pazymiai.size();
+                    double vidurkis = accumulate(s.pazymiai.begin(), s.pazymiai.end(), 0.0) / s.pazymiai.size();
                     s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
 
                     sort(s.pazymiai.begin(), s.pazymiai.end());
-                    int j = s.pazymiai.size() / 2;
+                    int j = s.pazymiai.size();
                     if (j % 2 == 0)
-                    {
-                        return (s.pazymiai[j / 2 - 1] + s.pazymiai[j / 2]) / 2.0;
-                    }
+                        s.mediana = (s.pazymiai[j / 2 - 1] + s.pazymiai[j / 2]) / 2.0;
                     else
-                    {
-                        return s.pazymiai[j / 2];
-                    }
+                        s.mediana = s.pazymiai[j / 2];
+
+                    studentai.push_back(s);
                 }
                 fd.close();
             }
