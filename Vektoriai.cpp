@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <chrono>
 
 using namespace std;
 
@@ -246,7 +247,9 @@ int main()
 
             if (stop == 4)
             {
-                std::ifstream fd("studentai10000.txt");
+                auto pradzia = std::chrono::high_resolution_clock::now();
+
+                std::ifstream fd("studentai1000000.txt");
                 string line;
                 std::stringstream buffer;
                 buffer << fd.rdbuf();
@@ -276,7 +279,7 @@ int main()
 
                     std::sort(s.pazymiai.begin(), s.pazymiai.end());
                     int j = s.pazymiai.size();
-                    
+
                     if (j % 2 == 0)
                     {
                         s.mediana = (s.pazymiai[j / 2 - 1] + s.pazymiai[j / 2]) / 2.0;
@@ -289,6 +292,10 @@ int main()
                     studentai.push_back(s);
                 }
                 fd.close();
+
+                auto pabaiga = std::chrono::high_resolution_clock::now();
+                std::chrono::duration<double, std::milli> elapsed = pabaiga - pradzia;
+                std::cout << "Laikas: " << elapsed.count() << " millisekundes" << std::endl;
             }
         }
         if (stop == 5)
