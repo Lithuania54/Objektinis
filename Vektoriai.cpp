@@ -1,39 +1,9 @@
 #include <bits/stdc++.h>
+#include "Studentas.h"
+#include "Utilities.h"
 #include <chrono>
 
 using namespace std;
-
-struct Studentas
-{
-    string vardas, pavarde;
-    int egzaminorez;
-    vector<int> pazymiai;
-    double galutinis, mediana;
-};
-
-bool tinkami(const string &name)
-{
-    for (char ch : name)
-    {
-        if (!isalpha(ch))
-        {
-            return false;
-        }
-    }
-    return true;
-}
-
-string RandomString(int ilgis)
-{
-    string possibleCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    string randomString = "";
-    srand(time(0));
-    for (int i = 0; i < ilgis; i++)
-    {
-        randomString += possibleCharacters[rand() % possibleCharacters.size()];
-    }
-    return randomString;
-}
 
 int main()
 {
@@ -249,7 +219,7 @@ int main()
             {
                 auto pradzia = std::chrono::high_resolution_clock::now();
 
-                std::ifstream fd("studentai1000000.txt");
+                std::ifstream fd("studentai10000.txt");
                 string line;
                 std::stringstream buffer;
                 buffer << fd.rdbuf();
