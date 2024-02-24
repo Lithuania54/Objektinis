@@ -1,5 +1,5 @@
-#ifndef UTILITIES_H
-#define UTILITIES_H
+#ifndef FUNKCIJOS_H
+#define FUNKCIJOS_H
 
 #include <string>
 

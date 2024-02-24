@@ -1,4 +1,4 @@
-#include "Utilities.h"
+#include "Funkcijos.h"
 #include <cctype>
 #include <cstdlib>
 #include <ctime>
@@ -34,6 +34,6 @@ void checkFileExists(const std::string& fileName)
     std::ifstream infile(fileName);
     if (!infile.good())
     {
-        throw std::runtime_error("Failas " + fileName + " nerastas.");
+        throw std::runtime_error(fileName);
     }
 }

@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 #include "Studentas.h"
-#include "Utilities.h"
+#include "Funkcijos.h"
 #include <chrono>
 
 using namespace std;
@@ -36,95 +36,94 @@ int main()
                     {
                         break;
                     }
-                    else
+
+                    while (!tinkami(s.vardas))
                     {
-                        if (!tinkami(s.vardas))
+                        std::cout << "Vardas turi buti sudarytas tik is raidziu. Bandykite dar karta.";
+                        std::cin >> s.vardas;
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    }
+
+                    do
+                    {
+                        std::cout << "Iveskite pavarde: ";
+                        std::cin >> s.pavarde;
+                        if (!tinkami(s.pavarde))
                         {
-                            std::cout << "Vardas turi buti sudarytas tik is raidziu. Bandykite dar karta." << endl;
                             std::cin.clear();
                             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                            std::cout << "Pavarde turi buti sudaryta tik is raidziu. Bandykite dar karta." << endl;
                         }
+                    } while (!tinkami(s.pavarde));
 
-                        do
+                    int j = 0;
+
+                    int counter = 0;
+
+                    do
+                    {
+                        std::cout << "Iveskite pazymius (kai baigsite, parasykite -1): ";
+                        int x;
+                        if (std::cin >> x && ((x > 0 && x <= 10) || (x == -1 && counter > 0)))
                         {
-                            std::cout << "Iveskite pavarde: ";
-                            std::cin >> s.pavarde;
-                            if (!tinkami(s.pavarde))
+                            if (x == -1)
                             {
-                                std::cin.clear();
-                                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                                std::cout << "Pavarde turi buti sudaryta tik is raidziu. Bandykite dar karta." << endl;
+                                break;
                             }
-                        } while (!tinkami(s.pavarde));
-
-                        int j = 0;
-
-                        int counter = 0;
-
-                        do
-                        {
-                            std::cout << "Iveskite pazymius (kai baigsite, parasykite -1): ";
-                            int x;
-                            if (std::cin >> x && ((x > 0 && x <= 10) || (x == -1 && counter > 0)))
-                            {
-                                if (x == -1)
-                                {
-                                    break;
-                                }
-                                s.pazymiai.push_back(x);
-                                counter++;
-                                j++;
-                            }
-                            else
-                            {
-                                std::cin.clear();
-                                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                                std::cout << "Neatitinka desimbales sistemos. Bandykite dar karta." << endl;
-                            }
-                        } while (true);
-
-                        do
-                        {
-                            std::cout << "Iveskite egzamino rezultata: ";
-
-                            if (std::cin >> s.egzaminorez && (s.egzaminorez > 0 && s.egzaminorez <= 10))
-                            {
-                                if (s.egzaminorez < 0 || s.egzaminorez > 10)
-                                {
-                                    std::cin.clear();
-                                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                                    std::cout << "Neatitinka desimbales sistemos. Bandykite dar karta." << endl;
-                                }
-                                else
-                                {
-                                    break;
-                                }
-                            }
-                            else
-                            {
-                                std::cin.clear();
-                                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                                std::cout << "Neatitinka desimbales sistemos. Bandykite dar karta." << endl;
-                            }
-                        } while (true);
-
-                        vidurkis = 1.0 * std::accumulate(s.pazymiai.begin(), s.pazymiai.begin() + j, 0) / j;
-                        s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
-
-                        std::sort(s.pazymiai.begin(), s.pazymiai.begin() + j);
-
-                        if (j % 2 == 0)
-                        {
-                            s.mediana = (s.pazymiai[j / 2] + s.pazymiai[(j / 2) - 1]) / 2.0;
+                            s.pazymiai.push_back(x);
+                            counter++;
+                            j++;
                         }
                         else
                         {
-                            s.mediana = s.pazymiai[j / 2];
+                            std::cin.clear();
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                            std::cout << "Neatitinka desimbales sistemos. Bandykite dar karta." << endl;
                         }
+                    } while (true);
 
-                        kiekis++;
-                        studentai.push_back(s);
+                    do
+                    {
+                        std::cout << "Iveskite egzamino rezultata: ";
+
+                        if (std::cin >> s.egzaminorez && (s.egzaminorez > 0 && s.egzaminorez <= 10))
+                        {
+                            if (s.egzaminorez < 0 || s.egzaminorez > 10)
+                            {
+                                std::cin.clear();
+                                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                std::cout << "Neatitinka desimbales sistemos. Bandykite dar karta." << endl;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            std::cin.clear();
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                            std::cout << "Neatitinka desimbales sistemos. Bandykite dar karta." << endl;
+                        }
+                    } while (true);
+
+                    vidurkis = 1.0 * std::accumulate(s.pazymiai.begin(), s.pazymiai.begin() + j, 0) / j;
+                    s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
+
+                    std::sort(s.pazymiai.begin(), s.pazymiai.begin() + j);
+
+                    if (j % 2 == 0)
+                    {
+                        s.mediana = (s.pazymiai[j / 2] + s.pazymiai[(j / 2) - 1]) / 2.0;
                     }
+                    else
+                    {
+                        s.mediana = s.pazymiai[j / 2];
+                    }
+
+                    kiekis++;
+                    studentai.push_back(s);
                 }
             }
 
@@ -215,57 +214,65 @@ int main()
                 kiekis++;
             }
 
-            if (stop == 4)
+            else if (stop == 4)
             {
-                auto pradzia = std::chrono::high_resolution_clock::now();
-
-                std::ifstream fd("studentai10000.txt");
-                string line;
-                std::stringstream buffer;
-                buffer << fd.rdbuf();
-
-                getline(buffer, line);
-
-                while (getline(buffer, line))
+                string fileName = "studentai10000.txt";
+                try
                 {
-                    stringstream read(line);
+                    checkFileExists(fileName);
 
-                    Studentas s;
-                    read >> s.vardas >> s.pavarde;
-                    int pazymys;
-                    kiekis++;
+                    auto pradzia = std::chrono::high_resolution_clock::now();
+                    std::ifstream fd(fileName);
+                    string line;
+                    std::stringstream buffer;
+                    buffer << fd.rdbuf();
 
-                    while (read >> pazymys)
+                    getline(buffer, line);
+
+                    while (getline(buffer, line))
                     {
-                        if (pazymys >= 1 && pazymys <= 10)
-                            s.pazymiai.push_back(pazymys);
+                        stringstream read(line);
+                        Studentas s;
+                        read >> s.vardas >> s.pavarde;
+                        int pazymys;
+                        kiekis++;
+
+                        while (read >> pazymys)
+                        {
+                            if (pazymys >= 1 && pazymys <= 10)
+                                s.pazymiai.push_back(pazymys);
+                        }
+
+                        s.egzaminorez = s.pazymiai.back();
+                        s.pazymiai.pop_back();
+
+                        double vidurkis = accumulate(s.pazymiai.begin(), s.pazymiai.end(), 0.0) / s.pazymiai.size();
+                        s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
+
+                        std::sort(s.pazymiai.begin(), s.pazymiai.end());
+                        int j = s.pazymiai.size();
+
+                        if (j % 2 == 0)
+                        {
+                            s.mediana = (s.pazymiai[j / 2 - 1] + s.pazymiai[j / 2]) / 2.0;
+                        }
+                        else
+                        {
+                            s.mediana = s.pazymiai[j / 2];
+                        }
+
+                        studentai.push_back(s);
                     }
+                    fd.close();
 
-                    s.egzaminorez = s.pazymiai.back();
-                    s.pazymiai.pop_back();
-
-                    double vidurkis = accumulate(s.pazymiai.begin(), s.pazymiai.end(), 0.0) / s.pazymiai.size();
-                    s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
-
-                    std::sort(s.pazymiai.begin(), s.pazymiai.end());
-                    int j = s.pazymiai.size();
-
-                    if (j % 2 == 0)
-                    {
-                        s.mediana = (s.pazymiai[j / 2 - 1] + s.pazymiai[j / 2]) / 2.0;
-                    }
-                    else
-                    {
-                        s.mediana = s.pazymiai[j / 2];
-                    }
-
-                    studentai.push_back(s);
+                    auto pabaiga = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> elapsed = pabaiga - pradzia;
+                    std::cout << "Laikas: " << elapsed.count() << " millisekundes" << std::endl;
                 }
-                fd.close();
-
-                auto pabaiga = std::chrono::high_resolution_clock::now();
-                std::chrono::duration<double, std::milli> elapsed = pabaiga - pradzia;
-                std::cout << "Laikas: " << elapsed.count() << " millisekundes" << std::endl;
+                catch (const std::runtime_error &e)
+                {
+                    std::cout << "Klaida atidarant faila: " << e.what() << std::endl;
+                }
             }
         }
         if (stop == 5)
@@ -312,19 +319,22 @@ int main()
         }
     }
 
-    std::cout.width(15);
-    std::cout << left << "Pavarde";
-    std::cout.width(15);
-    std::cout << left << "Vardas";
-    std::cout.width(23);
-    std::cout << left << "Galutinis (Vid.)";
-    std::cout.width(23);
-    std::cout << left << "Galutinis (med.)" << endl;
-    for (int i = 0; i < minusiukai; i++)
+    if (kiekis != 0)
     {
-        std::cout << "-";
+        std::cout.width(15);
+        std::cout << left << "Pavarde";
+        std::cout.width(15);
+        std::cout << left << "Vardas";
+        std::cout.width(23);
+        std::cout << left << "Galutinis (Vid.)";
+        std::cout.width(23);
+        std::cout << left << "Galutinis (med.)" << endl;
+        for (int i = 0; i < minusiukai; i++)
+        {
+            std::cout << "-";
+        }
+        std::cout << endl;
     }
-    std::cout << endl;
 
     for (int i = 0; i < kiekis; i++)
     {
