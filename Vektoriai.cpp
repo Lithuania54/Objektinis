@@ -20,10 +20,17 @@ int main()
         {
             if (std::cin.fail())
             {
-                std::cin.clear();
-                std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                cout << "Iveskite skaiciu. Pasirinkite skaiciu nuo 1 iki 5." << endl;
-                continue;
+                try
+                {
+                    throw runtime_error("Iveskite skaiciu. ");
+                }
+                catch (const runtime_error &e)
+                {
+                    cin.clear();
+                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    cout << e.what();
+                    cout << "Pasirinkite skaiciu nuo 1 iki 5. ";
+                }
             }
             if (stop == 1)
             {
@@ -39,10 +46,18 @@ int main()
 
                     while (!tinkami(s.vardas))
                     {
-                        std::cout << "Vardas turi buti sudarytas tik is raidziu. Bandykite dar karta.";
-                        std::cin >> s.vardas;
-                        std::cin.clear();
-                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        try
+                        {
+                            throw runtime_error("Vardas turi buti sudarytas tik is raidziu. ");
+                        }
+                        catch (const runtime_error &e)
+                        {
+                            cin.clear();
+                            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                            cout << e.what();
+                            cout << "Bandykite dar karta. ";
+                            std::cin >> s.vardas;
+                        }
                     }
 
                     do
@@ -136,9 +151,17 @@ int main()
                     std::cin >> s.vardas;
                     if (!tinkami(s.vardas))
                     {
-                        std::cout << "Vardas turi buti sudarytas tik is raidziu. Bandykite dar karta." << endl;
-                        std::cin.clear();
-                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        try
+                        {
+                            throw runtime_error("Vardas turi buti sudarytas tik is raidziu. ");
+                        }
+                        catch (const runtime_error &e)
+                        {
+                            cin.clear();
+                            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                            cout << e.what();
+                            cout << "Bandykite dar karta. ";
+                        }
                     }
                 } while (!tinkami(s.vardas));
                 if (s.vardas == "done")
