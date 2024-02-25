@@ -340,15 +340,23 @@ int main()
         }
         if (stop == 5)
         {
-            if (kiekis > 0)
+            if (kiekis > 1)
             {
                 int pasirinkimas;
-                cout << "Rusiavimas: 1 - Vardas, 2 - Pavarde, 3 - Galutinis vidurkis, 4 - Galutinis mediana" << endl;
+                cout << "Rusiavimas: 1 - Vardas, 2 - Pavarde, 3 - Galutinis vidurkis, 4 - Galutinis mediana. Pasirinkimas: ";
                 while (!(std::cin >> pasirinkimas) || pasirinkimas < 1 || pasirinkimas > 5)
                 {
-                    std::cin.clear();
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    cout << "Pasirinkti is: 1 - Vardas, 2 - Pavarde, 3 - Galutinis vidurkis, 4 - Galutinis mediana\n";
+                    try
+                    {
+                        throw runtime_error("Negalima. ");
+                    }
+                    catch (const runtime_error &e)
+                    {
+                        cin.clear();
+                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        cout << e.what();
+                        cout << "Pasirinkti is: 1 - Vardas, 2 - Pavarde, 3 - Galutinis vidurkis, 4 - Galutinis mediana. Pasirinkimas: ";
+                    }
                 }
                 switch (pasirinkimas)
                 {
@@ -375,10 +383,6 @@ int main()
             {
                 break;
             }
-        }
-        if (stop > 5 || stop < 1)
-        {
-            cout << "Pasirinkite nuo 1 iki 5" << endl;
         }
     }
 
