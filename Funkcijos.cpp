@@ -29,7 +29,7 @@ std::string RandomString(int ilgis)
     return randomString;
 }
 
-void checkFileExists(const std::string& fileName)
+void yrafailas(const std::string& fileName)
 {
     std::ifstream infile(fileName);
     if (!infile.good())

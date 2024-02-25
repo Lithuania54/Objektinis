@@ -219,7 +219,7 @@ int main()
                 string fileName = "studentai10000.txt";
                 try
                 {
-                    checkFileExists(fileName);
+                    yrafailas(fileName);
 
                     auto pradzia = std::chrono::high_resolution_clock::now();
                     std::ifstream fd(fileName);

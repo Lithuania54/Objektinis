@@ -14,5 +14,8 @@ Projektas susideda iš šių failų:
 - `Funkcijos.h` ir `Funkcijos.cpp`: apibrėžia pagalbines funkcijas, tokias kaip duomenų nuskaitymas ir generavimas.
 - `Vektoriai.cpp`: pavyzdinis failas, demonstruojantis veiksmus su vektoriais.
 
+## Exception handling pritaikymas
+Jeigu iš meniu yra pasirinktas 4 pasirinkimas (*skaityti iš failo*), tada yra naudojami *try* ir *catch* statements. Kurių pagalba patikrinam ar failas `studentai10000.txt` yra rastas.
+
 ## Paleidimas
 *g++ -o vektoriai Vektoriai.cpp Funkcijos.cpp* ir *.\vektoriai.exe*
