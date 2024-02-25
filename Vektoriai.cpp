@@ -66,9 +66,17 @@ int main()
                         std::cin >> s.pavarde;
                         if (!tinkami(s.pavarde))
                         {
-                            std::cin.clear();
-                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                            std::cout << "Pavarde turi buti sudaryta tik is raidziu. Bandykite dar karta." << endl;
+                            try
+                            {
+                                throw runtime_error("Pavarde turi buti sudaryta tik is raidziu. ");
+                            }
+                            catch (const runtime_error &e)
+                            {
+                                cin.clear();
+                                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                cout << e.what();
+                                cout << "Bandykite dar karta. ";
+                            }
                         }
                     } while (!tinkami(s.pavarde));
 
@@ -92,9 +100,17 @@ int main()
                         }
                         else
                         {
-                            std::cin.clear();
-                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                            std::cout << "Neatitinka desimbales sistemos. Bandykite dar karta." << endl;
+                            try
+                            {
+                                throw runtime_error("Neatitinka desimbales sistemos. ");
+                            }
+                            catch (const runtime_error &e)
+                            {
+                                cin.clear();
+                                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                cout << e.what();
+                                cout << "Bandykite dar karta. ";
+                            }
                         }
                     } while (true);
 
@@ -106,9 +122,17 @@ int main()
                         {
                             if (s.egzaminorez < 0 || s.egzaminorez > 10)
                             {
-                                std::cin.clear();
-                                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                                std::cout << "Neatitinka desimbales sistemos. Bandykite dar karta." << endl;
+                                try
+                                {
+                                    throw runtime_error("Neatitinka desimbales sistemos. ");
+                                }
+                                catch (const runtime_error &e)
+                                {
+                                    cin.clear();
+                                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                    cout << e.what();
+                                    cout << "Bandykite dar karta. ";
+                                }
                             }
                             else
                             {
@@ -117,9 +141,17 @@ int main()
                         }
                         else
                         {
-                            std::cin.clear();
-                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                            std::cout << "Neatitinka desimbales sistemos. Bandykite dar karta." << endl;
+                            try
+                            {
+                                throw runtime_error("Neatitinka desimbales sistemos. ");
+                            }
+                            catch (const runtime_error &e)
+                            {
+                                cin.clear();
+                                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                cout << e.what();
+                                cout << "Bandykite dar karta. ";
+                            }
                         }
                     } while (true);
 
@@ -177,9 +209,17 @@ int main()
                     std::cin >> s.pavarde;
                     if (!tinkami(s.pavarde))
                     {
-                        std::cin.clear();
-                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                        std::cout << "Pavarde turi buti sudaryta tik is raidziu. Bandykite dar karta." << endl;
+                        try
+                        {
+                            throw runtime_error("Pavarde turi buti sudaryta tik is raidziu. ");
+                        }
+                        catch (const runtime_error &e)
+                        {
+                            cin.clear();
+                            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                            cout << e.what();
+                            cout << "Bandykite dar karta. ";
+                        }
                     }
                 } while (!tinkami(s.pavarde));
 
