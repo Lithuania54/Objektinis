@@ -1,13 +1,18 @@
-# Efektyvumo Tyrimai
+# Efektyvumo Tyrimai (Refactoring and exception handling)
 
-## Tyrimo Metodika
-Atlikome tyrimus su trimis skirtingais duomenų rinkiniais: 10000, 100000 ir 1000000 įrašų.
+## Kaip naudotis
+1. Paleidus programą, pasirinkite veiksmą iš meniu.
+2. Jeigu pasirinkote duomenų įvedimą ranka, sekite programos nurodymus.
+3. Jeigu pasirinkote automatinį duomenų generavimą, nurodykite norimą studentų skaičių.
+4. Duomenų nuskaitymui iš failo, įsitikinkite, kad failas `studentai10000.txt` yra projekto aplanke.
+5. Rezultatų peržiūrai, pasirinkite atitinkamą meniu punktą.
 
-## Rezultatai
-Rezultatai parodė, kad veikimo laikas didėja eksponentiškai didinant įrašų skaičių. Pavyzdžiui, skaitymas iš failo su 10000 įrašų užtruko apie 36 milisekundes, su 100000 įrašų apie 525 milisekundes, o su 1000000 įrašų apie 2520 milisekundžių.
-
-## Išvados
-Išvada, kad veikimo laikas stipriai priklauso nuo apdorojamų duomenų kiekio.
+## Programos struktūra
+Projektas susideda iš šių failų:
+- `main.cpp`: pagrindinis programos failas.
+- `Studentas.h`: apibrėžia `Studentas` struktūrą.
+- `Funkcijos.h` ir `Funkcijos.cpp`: apibrėžia pagalbines funkcijas, tokias kaip duomenų nuskaitymas ir generavimas.
+- `Vektoriai.cpp`: pavyzdinis failas, demonstruojantis veiksmus su vektoriais.
 
 ## Paleidimas
-*g++ -o vektoriai Vektoriai.cpp* ir *.\vektoriai.exe*
+*g++ -o vektoriai Vektoriai.cpp Funkcijos.cpp* ir *.\vektoriai.exe*
