@@ -44,22 +44,22 @@ void generuotiFaila(int zmoniusk, const std::string &failopavadinimas, int ndkie
 {
     std::ofstream outFile(failopavadinimas);
     outFile << std::left << std::setw(15) << "Vardas" << std::setw(15) << "Pavarde";
-    for (int i = 0; i < ndkiekis; i++)
+    for (int i = 1; i <= ndkiekis; i++)
     {
-        outFile << "ND" << i++ << " ";
+        outFile << std::left << std::setw(2) << "ND" << std::setw(2) << i << " ";
     }
-    outFile << std::left << std::setw(15) << "Egz.\n";
+    outFile << std::left << std::setw(5) << "Egz." << "\n";
 
     for (int i = 0; i < zmoniusk; i++)
     {
         std::string v = "Vardas" + std::to_string(i);
         std::string p = "Pavarde" + std::to_string(i);
-        outFile << std::left << std::setw(15) << v << std::setw(15) << p;
+        outFile << std::setw(15) << v << std::setw(15) << p;
         for (int j = 0; j < ndkiekis; ++j)
         {
-            outFile << rand() % 10 + 1 << " ";
+            outFile << std::left << std::setw(4) << rand() % 10 + 1 << " ";
         }
-        outFile << rand() % 10 + 1 << "\n";
+        outFile << std::left << std::setw(5) << rand() % 10 + 1 << "\n";
     }
     outFile.close();
 }

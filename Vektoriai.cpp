@@ -302,7 +302,28 @@ int main()
                             }
                         }
                     }
-                    generuotiFaila(studentukiekis, "failas.txt");
+                    std::cout << "Iveskite norima ND kieki (nuo 1 iki 100): ";
+                    int ndkiekis;
+
+                    if (std::cin >> ndkiekis && (ndkiekis > 0 && ndkiekis <= 100))
+                    {
+                        if (ndkiekis < 1 || ndkiekis > 10000000)
+                        {
+                            try
+                            {
+                                throw runtime_error("Neatitinka intervalo. ");
+                            }
+                            catch (const runtime_error &e)
+                            {
+                                cin.clear();
+                                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                cout << e.what();
+                                cout << "Bandykite dar karta. ";
+                            }
+                        }
+                    }
+
+                    generuotiFaila(studentukiekis, "failas.txt", ndkiekis);
                     string fileName = "failas.txt";
                     yrafailas(fileName);
 
