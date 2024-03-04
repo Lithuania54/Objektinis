@@ -282,12 +282,33 @@ int main()
             {
                 try
                 {
-                    std::cout << "Iveskite norima studentu kieki (nuo 1 iki 10000000): ";
                     int studentukiekis;
-
-                    if (std::cin >> studentukiekis && (studentukiekis > 0 && studentukiekis <= 10000000))
+                    do
                     {
-                        if (studentukiekis < 1 || studentukiekis > 10000000)
+                        std::cout << "Iveskite norima studentu kieki (nuo 1 iki 10000000): ";
+
+                        if (std::cin >> studentukiekis && (studentukiekis > 0 && studentukiekis <= 10000000))
+                        {
+                            if (studentukiekis < 1 || studentukiekis > 10000000)
+                            {
+                                try
+                                {
+                                    throw runtime_error("Neatitinka intervalo. ");
+                                }
+                                catch (const runtime_error &e)
+                                {
+                                    cin.clear();
+                                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                    cout << e.what();
+                                    cout << "Bandykite dar karta. ";
+                                }
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        else
                         {
                             try
                             {
@@ -301,13 +322,34 @@ int main()
                                 cout << "Bandykite dar karta. ";
                             }
                         }
-                    }
-                    std::cout << "Iveskite norima ND kieki (nuo 1 iki 100): ";
+                    } while (true);
+
                     int ndkiekis;
-
-                    if (std::cin >> ndkiekis && (ndkiekis > 0 && ndkiekis <= 100))
+                    do
                     {
-                        if (ndkiekis < 1 || ndkiekis > 10000000)
+                        std::cout << "Iveskite norima ND kieki (nuo 1 iki 100): ";
+                        if (std::cin >> ndkiekis && (ndkiekis > 0 && ndkiekis <= 100))
+                        {
+                            if (ndkiekis < 1 || ndkiekis > 10000000)
+                            {
+                                try
+                                {
+                                    throw runtime_error("Neatitinka intervalo. ");
+                                }
+                                catch (const runtime_error &e)
+                                {
+                                    cin.clear();
+                                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                    cout << e.what();
+                                    cout << "Bandykite dar karta. ";
+                                }
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        else
                         {
                             try
                             {
@@ -321,7 +363,8 @@ int main()
                                 cout << "Bandykite dar karta. ";
                             }
                         }
-                    }
+
+                    } while (true);
 
                     generuotiFaila(studentukiekis, "failas.txt", ndkiekis);
                     string fileName = "failas.txt";
