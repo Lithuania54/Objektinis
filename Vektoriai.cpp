@@ -15,7 +15,7 @@ int main()
     while (true)
     {
         Studentas s;
-        std::cout << "1. - ranka\n2. - generuoti pazymius\n3. - generuoti ir pazymius ir studentu vardus, pavardes\n4. - generuoti fiala ir skaityti is failo\n5. - baigti darba" << endl;
+        std::cout << "1. - ranka\n2. - generuoti pazymius\n3. - generuoti ir pazymius ir studentu vardus, pavardes\n4. - generuoti faila ir skaityti is failo\n5. - baigti darba" << endl;
         std::cin >> stop;
         if (stop < 5)
         {
@@ -285,16 +285,19 @@ int main()
 
                 if (std::cin >> studentukiekis && (studentukiekis > 0 && studentukiekis <= 10000000))
                 {
-                    try
+                    if (studentukiekis < 1 || studentukiekis > 10000000)
                     {
-                        throw runtime_error("Neatitinka intervalo. ");
-                    }
-                    catch (const runtime_error &e)
-                    {
-                        cin.clear();
-                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                        cout << e.what();
-                        cout << "Bandykite dar karta. ";
+                        try
+                        {
+                            throw runtime_error("Neatitinka intervalo. ");
+                        }
+                        catch (const runtime_error &e)
+                        {
+                            cin.clear();
+                            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                            cout << e.what();
+                            cout << "Bandykite dar karta. ";
+                        }
                     }
                 }
                 generuotiFaila(studentukiekis, "failas.txt");
