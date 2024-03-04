@@ -7,6 +7,7 @@ using namespace std;
 
 int main()
 {
+    srand(time(nullptr));
     double vidurkis = 0;
     int minusiukai = 80, stop, kiekis = 0;
     vector<Studentas> studentai;
@@ -14,7 +15,7 @@ int main()
     while (true)
     {
         Studentas s;
-        std::cout << "1. - ranka\n2. - generuoti pazymius\n3. - generuoti ir pazymius ir studentu vardus, pavardes\n4. - skaityti is failo\n5. - baigti darba" << endl;
+        std::cout << "1. - ranka\n2. - generuoti pazymius\n3. - generuoti ir pazymius ir studentu vardus, pavardes\n4. - generuoti fiala ir skaityti is failo\n5. - baigti darba" << endl;
         std::cin >> stop;
         if (stop < 5)
         {
@@ -279,7 +280,25 @@ int main()
 
             else if (stop == 4)
             {
-                string fileName = "studentai10000.txt";
+                std::cout << "Iveskite norima studentu kieki (nuo 1 iki 10000000): ";
+                int studentukiekis;
+
+                if (std::cin >> studentukiekis && (studentukiekis > 0 && studentukiekis <= 10000000))
+                {
+                    try
+                    {
+                        throw runtime_error("Neatitinka intervalo. ");
+                    }
+                    catch (const runtime_error &e)
+                    {
+                        cin.clear();
+                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        cout << e.what();
+                        cout << "Bandykite dar karta. ";
+                    }
+                }
+                generuotiFaila(studentukiekis, "failas.txt");
+                string fileName = "failas.txt";
                 try
                 {
                     yrafailas(fileName);
