@@ -280,30 +280,30 @@ int main()
 
             else if (stop == 4)
             {
-                std::cout << "Iveskite norima studentu kieki (nuo 1 iki 10000000): ";
-                int studentukiekis;
-
-                if (std::cin >> studentukiekis && (studentukiekis > 0 && studentukiekis <= 10000000))
-                {
-                    if (studentukiekis < 1 || studentukiekis > 10000000)
-                    {
-                        try
-                        {
-                            throw runtime_error("Neatitinka intervalo. ");
-                        }
-                        catch (const runtime_error &e)
-                        {
-                            cin.clear();
-                            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                            cout << e.what();
-                            cout << "Bandykite dar karta. ";
-                        }
-                    }
-                }
-                generuotiFaila(studentukiekis, "failas.txt");
-                string fileName = "failas.txt";
                 try
                 {
+                    std::cout << "Iveskite norima studentu kieki (nuo 1 iki 10000000): ";
+                    int studentukiekis;
+
+                    if (std::cin >> studentukiekis && (studentukiekis > 0 && studentukiekis <= 10000000))
+                    {
+                        if (studentukiekis < 1 || studentukiekis > 10000000)
+                        {
+                            try
+                            {
+                                throw runtime_error("Neatitinka intervalo. ");
+                            }
+                            catch (const runtime_error &e)
+                            {
+                                cin.clear();
+                                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                cout << e.what();
+                                cout << "Bandykite dar karta. ";
+                            }
+                        }
+                    }
+                    generuotiFaila(studentukiekis, "failas.txt");
+                    string fileName = "failas.txt";
                     yrafailas(fileName);
 
                     auto pradzia = std::chrono::high_resolution_clock::now();
