@@ -10,7 +10,7 @@ int main()
     srand(time(nullptr));
     double vidurkis = 0;
     int minusiukai = 80, stop, kiekis = 0;
-    vector<Studentas> studentai;
+    vector<Studentas> studentai, pazenge, nepazenge;
 
     while (true)
     {
@@ -410,7 +410,14 @@ int main()
                             s.mediana = s.pazymiai[j / 2];
                         }
 
-                        studentai.push_back(s);
+                        if (s.galutinis >= 5)
+                        {
+                            pazenge.push_back(s);
+                        }
+                        else
+                        {
+                            nepazenge.push_back(s);
+                        }
                     }
                     fd.close();
 
@@ -422,6 +429,8 @@ int main()
                 {
                     std::cout << "Klaida atidarant faila: " << e.what() << std::endl;
                 }
+                    irasytiStudentus(nepazenge, "nepazenge.txt");
+                    irasytiStudentus(pazenge, "pazenge.txt");
             }
         }
         if (stop == 5)
