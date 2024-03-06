@@ -15,9 +15,9 @@ int main()
     while (true)
     {
         Studentas s;
-        std::cout << "1. - ranka\n2. - generuoti pazymius\n3. - generuoti ir pazymius ir studentu vardus, pavardes\n4. - generuoti faila ir skaityti is failo\n5. - baigti darba" << endl;
+        std::cout << "1. - ranka\n2. - generuoti pazymius\n3. - generuoti ir pazymius ir studentu vardus, pavardes\n4. - skaityti is failo\n5. - generuoti faila\n6. - baigti darba" << endl;
         std::cin >> stop;
-        if (stop < 5)
+        if (stop < 6)
         {
             if (std::cin.fail())
             {
@@ -280,6 +280,67 @@ int main()
 
             else if (stop == 4)
             {
+                string fileName = "studentai10000.txt";
+                try
+                {
+                    yrafailas(fileName);
+
+                    auto pradzia = std::chrono::high_resolution_clock::now();
+                    std::ifstream fd(fileName);
+                    string line;
+                    std::stringstream buffer;
+                    buffer << fd.rdbuf();
+
+                    getline(buffer, line);
+
+                    while (getline(buffer, line))
+                    {
+                        stringstream read(line);
+                        Studentas s;
+                        read >> s.vardas >> s.pavarde;
+                        int pazymys;
+                        kiekis++;
+
+                        while (read >> pazymys)
+                        {
+                            if (pazymys >= 1 && pazymys <= 10)
+                                s.pazymiai.push_back(pazymys);
+                        }
+
+                        s.egzaminorez = s.pazymiai.back();
+                        s.pazymiai.pop_back();
+
+                        double vidurkis = accumulate(s.pazymiai.begin(), s.pazymiai.end(), 0.0) / s.pazymiai.size();
+                        s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
+
+                        std::sort(s.pazymiai.begin(), s.pazymiai.end());
+                        int j = s.pazymiai.size();
+
+                        if (j % 2 == 0)
+                        {
+                            s.mediana = (s.pazymiai[j / 2 - 1] + s.pazymiai[j / 2]) / 2.0;
+                        }
+                        else
+                        {
+                            s.mediana = s.pazymiai[j / 2];
+                        }
+
+                        studentai.push_back(s);
+                    }
+                    fd.close();
+
+                    auto pabaiga = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> elapsed = pabaiga - pradzia;
+                    std::cout << "Laikas: " << elapsed.count() << " millisekundes" << std::endl;
+                }
+                catch (const std::runtime_error &e)
+                {
+                    std::cout << "Klaida atidarant faila: " << e.what() << std::endl;
+                }
+            }
+
+            else if (stop == 5)
+            {
                 try
                 {
                     int studentukiekis;
@@ -410,6 +471,8 @@ int main()
                             s.mediana = s.pazymiai[j / 2];
                         }
 
+                        studentai.push_back(s);
+
                         if (s.galutinis >= 5)
                         {
                             pazenge.push_back(s);
@@ -429,11 +492,11 @@ int main()
                 {
                     std::cout << "Klaida atidarant faila: " << e.what() << std::endl;
                 }
-                    irasytiStudentus(nepazenge, "nepazenge.txt");
-                    irasytiStudentus(pazenge, "pazenge.txt");
+                irasytiStudentus(nepazenge, "nepazenge.txt");
+                irasytiStudentus(pazenge, "pazenge.txt");
             }
         }
-        if (stop == 5)
+        if (stop == 6)
         {
             if (kiekis > 1)
             {
