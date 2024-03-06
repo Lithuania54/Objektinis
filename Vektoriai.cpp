@@ -472,15 +472,6 @@ int main()
                         }
 
                         studentai.push_back(s);
-
-                        if (s.galutinis >= 5)
-                        {
-                            pazenge.push_back(s);
-                        }
-                        else
-                        {
-                            nepazenge.push_back(s);
-                        }
                     }
                     fd.close();
 
@@ -492,12 +483,22 @@ int main()
                 {
                     std::cout << "Klaida atidarant faila: " << e.what() << std::endl;
                 }
-                irasytiStudentus(nepazenge, "nepazenge.txt");
-                irasytiStudentus(pazenge, "pazenge.txt");
             }
         }
         if (stop == 6)
         {
+                for (Studentas& student : studentai) {
+        if (student.galutinis < 5) {
+            nepazenge.push_back(student);
+        } else {
+            pazenge.push_back(student);
+        }
+    }
+
+    irasytiStudentus(nepazenge, "nepazenge.txt");
+    irasytiStudentus(pazenge, "pazenge.txt");
+
+            
             if (kiekis > 1)
             {
                 int pasirinkimas;

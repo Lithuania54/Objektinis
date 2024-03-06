@@ -7,6 +7,7 @@
 #include <string>
 #include <iomanip>
 #include <vector>
+#include <chrono>
 #include "Studentas.h"
 
 bool tinkami(const std::string &name)
@@ -68,9 +69,10 @@ void generuotiFaila(int zmoniusk, const std::string &failopavadinimas, int ndkie
 
 void irasytiStudentus(const std::vector<Studentas>& studentai, const std::string& failoVardas) {
     std::ofstream outFile(failoVardas);
+    outFile << std::left << std::setw(20) << "Vardas" << std::setw(20) << "Pavarde" << std::setw(20) << "Galutinis" << "\n";
     for (const auto& studentas : studentai) {
-        outFile << std::left << std::setw(15) << studentas.vardas
-                << std::left << std::setw(15) << studentas.pavarde
+        outFile << std::left << std::setw(20) << studentas.vardas
+                << std::left << std::setw(20) << studentas.pavarde
                 << std::left << std::setw(10) << studentas.galutinis << "\n";
     }
     outFile.close();
