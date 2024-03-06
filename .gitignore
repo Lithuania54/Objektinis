@@ -31,10 +31,6 @@
 *.out
 *.app
 
-
-
 *.txt
 
-
 .vscode/
-images/
