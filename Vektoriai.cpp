@@ -7,6 +7,8 @@ using namespace std;
 
 int main()
 {
+    auto startas = std::chrono::high_resolution_clock::now();
+
     srand(time(nullptr));
     double vidurkis = 0;
     int minusiukai = 80, stop, kiekis = 0;
@@ -513,7 +515,7 @@ int main()
             if (kiekis > 1)
             {
                 int pasirinkimas;
-                cout << "Rusiavimas: 1 - Vardas, 2 - Pavarde, 3 - Galutinis vidurkis, 4 - Galutinis mediana. Pasirinkimas: ";
+                cout << "Rusiavimas: 1 - Vardas, 2 - Pavarde, 3 - Galutinis vidurkis, 4 - Galutinis mediana, 5 - Nerusiuoti. Pasirinkimas: ";
                 while (!(std::cin >> pasirinkimas) || pasirinkimas < 1 || pasirinkimas > 5)
                 {
                     try
@@ -525,7 +527,7 @@ int main()
                         cin.clear();
                         cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                         cout << e.what();
-                        cout << "Pasirinkti is: 1 - Vardas, 2 - Pavarde, 3 - Galutinis vidurkis, 4 - Galutinis mediana. Pasirinkimas: ";
+                        cout << "Pasirinkti is: 1 - Vardas, 2 - Pavarde, 3 - Galutinis vidurkis, 4 - Galutinis mediana, 5 - Nerusiuoti. Pasirinkimas: ";
                     }
                 }
                 switch (pasirinkimas)
@@ -546,6 +548,8 @@ int main()
                     std::sort(studentai.begin(), studentai.end(), [](Studentas &a, Studentas &b)
                               { return a.mediana < b.mediana; });
                     break;
+                case 5:
+                    break;
                 }
                 break;
             }
@@ -555,6 +559,39 @@ int main()
             }
         }
     }
+
+    auto endas = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> diffe = endas - startas;
+    std::cout << "Visas programos laikas: " << diffe.count() << " sekundes" << std::endl;
+
+    // if (kiekis != 0)
+    // {
+    //     std::cout.width(15);
+    //     std::cout << left << "Pavarde";
+    //     std::cout.width(15);
+    //     std::cout << left << "Vardas";
+    //     std::cout.width(23);
+    //     std::cout << left << "Galutinis (Vid.)";
+    //     std::cout.width(23);
+    //     std::cout << left << "Galutinis (med.)" << endl;
+    //     for (int i = 0; i < minusiukai; i++)
+    //     {
+    //         std::cout << "-";
+    //     }
+    //     std::cout << endl;
+    // }
+
+    // for (int i = 0; i < kiekis; i++)
+    // {
+    //     std::cout.width(15);
+    //     std::cout << left << studentai[i].pavarde;
+    //     std::cout.width(15);
+    //     std::cout << left << studentai[i].vardas;
+    //     std::cout.width(23);
+    //     std::cout << left << fixed << setprecision(2) << studentai[i].galutinis;
+    //     std::cout.width(23);
+    //     std::cout << left << fixed << setprecision(2) << studentai[i].mediana << endl;
+    // }
 
     return 0;
 }
