@@ -4,6 +4,7 @@
 #include <ctime>
 #include <fstream>
 #include <stdexcept>
+#include <iostream>
 #include <string>
 #include <iomanip>
 #include <vector>
@@ -45,13 +46,15 @@ void yrafailas(const std::string &fileName)
 
 void generuotiFaila(int zmoniusk, const std::string &failopavadinimas, int ndkiekis)
 {
+    auto start_write = std::chrono::high_resolution_clock::now();
     std::ofstream outFile(failopavadinimas);
     outFile << std::left << std::setw(20) << "Vardas" << std::setw(20) << "Pavarde";
     for (int i = 1; i <= ndkiekis; i++)
     {
         outFile << std::left << std::setw(2) << "ND" << std::setw(2) << i << " ";
     }
-    outFile << std::left << std::setw(5) << "Egz." << "\n";
+    outFile << std::left << std::setw(5) << "Egz."
+            << "\n";
 
     for (int i = 0; i < zmoniusk; i++)
     {
@@ -65,15 +68,21 @@ void generuotiFaila(int zmoniusk, const std::string &failopavadinimas, int ndkie
         outFile << std::left << std::setw(5) << rand() % 10 + 1 << "\n";
     }
     outFile.close();
+    auto end_write = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> diff_write = end_write - start_write;
+    std::cout << "Failo kurimas " << diff_write.count() << " seconds" << std::endl;
 }
 
-void irasytiStudentus(const std::vector<Studentas>& studentai, const std::string& failoVardas) {
+void irasytiStudentus(const std::vector<Studentas> &studentai, const std::string &failoVardas)
+{
     std::ofstream outFile(failoVardas);
-    outFile << std::left << std::setw(20) << "Vardas" << std::setw(20) << "Pavarde" << std::setw(20) << "Galutinis" << "\n";
-    for (const auto& studentas : studentai) {
+    outFile << std::left << std::setw(20) << "Vardas" << std::setw(20) << "Pavarde" << std::setw(20) << "Galutinis"
+            << "\n";
+    for (const auto &studentas : studentai)
+    {
         outFile << std::left << std::setw(20) << studentas.vardas
                 << std::left << std::setw(20) << studentas.pavarde
-                << std::left << std::setw(10) << studentas.galutinis << "\n";
+                << std::left << std::setw(10) << std::fixed << std::setprecision(2) << studentas.galutinis << "\n";
     }
     outFile.close();
 }

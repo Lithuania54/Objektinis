@@ -331,7 +331,7 @@ int main()
 
                     auto pabaiga = std::chrono::high_resolution_clock::now();
                     std::chrono::duration<double, std::milli> elapsed = pabaiga - pradzia;
-                    std::cout << "Laikas: " << elapsed.count() << " millisekundes" << std::endl;
+                    std::cout << "Duomenu nuskaitymas is failo: " << elapsed.count() << " millisekundes" << std::endl;
                 }
                 catch (const std::runtime_error &e)
                 {
@@ -477,7 +477,7 @@ int main()
 
                     auto pabaiga = std::chrono::high_resolution_clock::now();
                     std::chrono::duration<double, std::milli> elapsed = pabaiga - pradzia;
-                    std::cout << "Laikas: " << elapsed.count() << " millisekundes" << std::endl;
+                    std::cout << "Duomenu nuskaitymas: " << elapsed.count() << " millisekundes" << std::endl;
                 }
                 catch (const std::runtime_error &e)
                 {
@@ -487,18 +487,29 @@ int main()
         }
         if (stop == 6)
         {
-                for (Studentas& student : studentai) {
-        if (student.galutinis < 5) {
-            nepazenge.push_back(student);
-        } else {
-            pazenge.push_back(student);
-        }
-    }
+            auto starta = std::chrono::high_resolution_clock::now();
+            for (Studentas &student : studentai)
+            {
+                if (student.galutinis < 5)
+                {
+                    nepazenge.push_back(student);
+                }
+                else
+                {
+                    pazenge.push_back(student);
+                }
+            }
+            auto ending = std::chrono::high_resolution_clock::now();
+            std::chrono::duration<double> differ = ending - starta;
+            std::cout << "Studentu rusiavimas: " << differ.count() << " seconds" << std::endl;
 
-    irasytiStudentus(nepazenge, "nepazenge.txt");
-    irasytiStudentus(pazenge, "pazenge.txt");
+            auto startas = std::chrono::high_resolution_clock::now();
+            irasytiStudentus(nepazenge, "nepazenge.txt");
+            irasytiStudentus(pazenge, "pazenge.txt");
+            auto endas = std::chrono::high_resolution_clock::now();
+            std::chrono::duration<double> diffe = endas - startas;
+            std::cout << "Surusiuotu studentu isvedimas i du failus: " << diffe.count() << " seconds" << std::endl;
 
-            
             if (kiekis > 1)
             {
                 int pasirinkimas;
