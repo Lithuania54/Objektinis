@@ -70,7 +70,7 @@ void generuotiFaila(int zmoniusk, const std::string &failopavadinimas, int ndkie
     outFile.close();
     auto end_write = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> diff_write = end_write - start_write;
-    std::cout << "Failo kurimas " << diff_write.count() << " seconds" << std::endl;
+    std::cout << "Failo kurimas " << diff_write.count() << " sekundes" << std::endl;
 }
 
 void irasytiStudentus(const std::vector<Studentas> &studentai, const std::string &failoVardas)

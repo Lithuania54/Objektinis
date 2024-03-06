@@ -427,8 +427,8 @@ int main()
 
                     } while (true);
 
-                    generuotiFaila(studentukiekis, "failas.txt", ndkiekis);
-                    string fileName = "failas.txt";
+                    generuotiFaila(studentukiekis, "failas10000000.txt", ndkiekis);
+                    string fileName = "failas10000000.txt";
                     yrafailas(fileName);
 
                     auto pradzia = std::chrono::high_resolution_clock::now();
@@ -476,8 +476,8 @@ int main()
                     fd.close();
 
                     auto pabaiga = std::chrono::high_resolution_clock::now();
-                    std::chrono::duration<double, std::milli> elapsed = pabaiga - pradzia;
-                    std::cout << "Duomenu nuskaitymas: " << elapsed.count() << " millisekundes" << std::endl;
+                    std::chrono::duration<double> elapsed = pabaiga - pradzia;
+                    std::cout << "Duomenu nuskaitymas: " << elapsed.count() << " sekundes" << std::endl;
                 }
                 catch (const std::runtime_error &e)
                 {
@@ -501,14 +501,14 @@ int main()
             }
             auto ending = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double> differ = ending - starta;
-            std::cout << "Studentu rusiavimas: " << differ.count() << " seconds" << std::endl;
+            std::cout << "Studentu rusiavimas: " << differ.count() << " sekundes" << std::endl;
 
             auto startas = std::chrono::high_resolution_clock::now();
             irasytiStudentus(nepazenge, "nepazenge.txt");
             irasytiStudentus(pazenge, "pazenge.txt");
             auto endas = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double> diffe = endas - startas;
-            std::cout << "Surusiuotu studentu isvedimas i du failus: " << diffe.count() << " seconds" << std::endl;
+            std::cout << "Surusiuotu studentu isvedimas i du failus: " << diffe.count() << " sekundes" << std::endl;
 
             if (kiekis > 1)
             {
@@ -554,35 +554,6 @@ int main()
                 break;
             }
         }
-    }
-
-    if (kiekis != 0)
-    {
-        std::cout.width(15);
-        std::cout << left << "Pavarde";
-        std::cout.width(15);
-        std::cout << left << "Vardas";
-        std::cout.width(23);
-        std::cout << left << "Galutinis (Vid.)";
-        std::cout.width(23);
-        std::cout << left << "Galutinis (med.)" << endl;
-        for (int i = 0; i < minusiukai; i++)
-        {
-            std::cout << "-";
-        }
-        std::cout << endl;
-    }
-
-    for (int i = 0; i < kiekis; i++)
-    {
-        std::cout.width(15);
-        std::cout << left << studentai[i].pavarde;
-        std::cout.width(15);
-        std::cout << left << studentai[i].vardas;
-        std::cout.width(23);
-        std::cout << left << fixed << setprecision(2) << studentai[i].galutinis;
-        std::cout.width(23);
-        std::cout << left << fixed << setprecision(2) << studentai[i].mediana << endl;
     }
 
     return 0;
