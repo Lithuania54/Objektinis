@@ -18,10 +18,3 @@
 ## Paleidimas
 - Programą galite paleisti iš komandinės eilutės, nurodant reikiamus parametrus:
 *g++ -o vektoriai Vektoriai.cpp Funkcijos.cpp* ir *.\vektoriai.exe*
-
-## Nuotraukos
-![failas1000](/images/failas1000.png)
-![failas10000](/images/failas10000.png)
-![failas100000](/images/failas100000.png)
-![failas1000000](/images/failas1000000.png)
-![failas10000000](/images/failas10000000.png)
