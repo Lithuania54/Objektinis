@@ -225,8 +225,6 @@ int main()
                     }
                 } while (!tinkami(s.pavarde));
 
-                std::vector<int>::size_type j = 0;
-
                 for (int i = 0; i < 10; i++)
                 {
                     s.pazymiai.push_back(rand() % 11);

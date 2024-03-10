@@ -7,7 +7,7 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
-#include <vector>
+#include <deque>
 #include <chrono>
 #include "Studentas.h"
 
@@ -73,7 +73,7 @@ void generuotiFaila(int zmoniusk, const std::string &failopavadinimas, int ndkie
     std::cout << "Failo kurimas " << diff_write.count() << " sekundes" << std::endl;
 }
 
-void irasytiStudentus(const std::vector<Studentas> &studentai, const std::string &failoVardas)
+void irasytiStudentus(const std::deque<Studentas> &studentai, const std::string &failoVardas)
 {
     std::ofstream outFile(failoVardas);
     outFile << std::left << std::setw(20) << "Vardas" << std::setw(20) << "Pavarde" << std::setw(20) << "Galutinis"
