@@ -84,8 +84,6 @@ int main()
                         }
                     } while (!tinkami(s.pavarde));
 
-                    int j = 0;
-
                     int counter = 0;
 
                     do
@@ -167,6 +165,7 @@ int main()
 
                     auto it = s.pazymiai.begin();
                     std::advance(it, s.pazymiai.size() / 2);
+
                     if (s.pazymiai.size() % 2 == 0)
                     {
                         auto it2 = it;
@@ -285,6 +284,7 @@ int main()
 
                 auto it = s.pazymiai.begin();
                 std::advance(it, s.pazymiai.size() / 2);
+
                 if (s.pazymiai.size() % 2 == 0)
                 {
                     auto it2 = it;
@@ -339,6 +339,7 @@ int main()
 
                         auto it = s.pazymiai.begin();
                         std::advance(it, s.pazymiai.size() / 2);
+
                         if (s.pazymiai.size() % 2 == 0)
                         {
                             auto it2 = it;
@@ -489,6 +490,7 @@ int main()
 
                         auto it = s.pazymiai.begin();
                         std::advance(it, s.pazymiai.size() / 2);
+                        
                         if (s.pazymiai.size() % 2 == 0)
                         {
                             auto it2 = it;
