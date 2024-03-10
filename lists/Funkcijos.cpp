@@ -46,7 +46,6 @@ void yrafailas(const std::string &fileName)
 
 void generuotiFaila(int zmoniusk, const std::string &failopavadinimas, int ndkiekis)
 {
-    auto start_write = std::chrono::high_resolution_clock::now();
     std::ofstream outFile(failopavadinimas);
     outFile << std::left << std::setw(20) << "Vardas" << std::setw(20) << "Pavarde";
     for (int i = 1; i <= ndkiekis; i++)
@@ -68,9 +67,6 @@ void generuotiFaila(int zmoniusk, const std::string &failopavadinimas, int ndkie
         outFile << std::left << std::setw(5) << rand() % 10 + 1 << "\n";
     }
     outFile.close();
-    auto end_write = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> diff_write = end_write - start_write;
-    std::cout << "Failo kurimas " << diff_write.count() << " sekundes" << std::endl;
 }
 
 void irasytiStudentus(const std::list<Studentas> &studentai, const std::string &failoVardas)

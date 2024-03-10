@@ -484,7 +484,7 @@ int main()
         }
         if (stop == 6)
         {
-            auto starta = std::chrono::high_resolution_clock::now();
+            auto startas = std::chrono::high_resolution_clock::now();
             for (Studentas &student : studentai)
             {
                 if (student.galutinis < 5)
@@ -496,16 +496,12 @@ int main()
                     pazenge.push_back(student);
                 }
             }
-            auto ending = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<double> differ = ending - starta;
-            std::cout << "Studentu rusiavimas: " << differ.count() << " sekundes" << std::endl;
 
-            auto startas = std::chrono::high_resolution_clock::now();
             irasytiStudentus(nepazenge, "nepazenge.txt");
             irasytiStudentus(pazenge, "pazenge.txt");
             auto endas = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double> diffe = endas - startas;
-            std::cout << "Surusiuotu studentu isvedimas i du failus: " << diffe.count() << " sekundes" << std::endl;
+            std::cout << "Surusiavimas ir skirstymas: " << diffe.count() << " sekundes" << std::endl;
 
             if (kiekis > 1)
             {
@@ -525,6 +521,8 @@ int main()
                         cout << "Pasirinkti is: 1 - Vardas, 2 - Pavarde, 3 - Galutinis vidurkis, 4 - Galutinis mediana, 5 - Nerusiuoti. Pasirinkimas: ";
                     }
                 }
+
+                auto start = std::chrono::high_resolution_clock::now();
                 switch (pasirinkimas)
                 {
                 case 1:
@@ -546,6 +544,9 @@ int main()
                 case 5:
                     break;
                 }
+                auto end = std::chrono::high_resolution_clock::now();
+                std::chrono::duration<double> diffe = end - start;
+                std::cout << "Rusiavimas didejimo tvarka: " << diffe.count() << " sekundes" << std::endl;
                 break;
             }
             else
@@ -555,34 +556,34 @@ int main()
         }
     }
 
-    if (kiekis != 0)
-    {
-        std::cout.width(15);
-        std::cout << left << "Pavarde";
-        std::cout.width(15);
-        std::cout << left << "Vardas";
-        std::cout.width(23);
-        std::cout << left << "Galutinis (Vid.)";
-        std::cout.width(23);
-        std::cout << left << "Galutinis (med.)" << endl;
-        for (int i = 0; i < minusiukai; i++)
-        {
-            std::cout << "-";
-        }
-        std::cout << endl;
-    }
+    // if (kiekis != 0)
+    // {
+    //     std::cout.width(15);
+    //     std::cout << left << "Pavarde";
+    //     std::cout.width(15);
+    //     std::cout << left << "Vardas";
+    //     std::cout.width(23);
+    //     std::cout << left << "Galutinis (Vid.)";
+    //     std::cout.width(23);
+    //     std::cout << left << "Galutinis (med.)" << endl;
+    //     for (int i = 0; i < minusiukai; i++)
+    //     {
+    //         std::cout << "-";
+    //     }
+    //     std::cout << endl;
+    // }
 
-    for (int i = 0; i < kiekis; i++)
-    {
-        std::cout.width(15);
-        std::cout << left << studentai[i].pavarde;
-        std::cout.width(15);
-        std::cout << left << studentai[i].vardas;
-        std::cout.width(23);
-        std::cout << left << fixed << setprecision(2) << studentai[i].galutinis;
-        std::cout.width(23);
-        std::cout << left << fixed << setprecision(2) << studentai[i].mediana << endl;
-    }
+    // for (int i = 0; i < kiekis; i++)
+    // {
+    //     std::cout.width(15);
+    //     std::cout << left << studentai[i].pavarde;
+    //     std::cout.width(15);
+    //     std::cout << left << studentai[i].vardas;
+    //     std::cout.width(23);
+    //     std::cout << left << fixed << setprecision(2) << studentai[i].galutinis;
+    //     std::cout.width(23);
+    //     std::cout << left << fixed << setprecision(2) << studentai[i].mediana << endl;
+    // }
 
     return 0;
 }
