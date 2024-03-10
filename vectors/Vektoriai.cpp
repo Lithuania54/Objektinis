@@ -2,8 +2,6 @@
 #include "Studentas.h"
 #include "Funkcijos.h"
 #include <chrono>
-#include <list>
-#include <deque>
 
 using namespace std;
 
@@ -15,40 +13,7 @@ int main()
     double vidurkis = 0;
     int minusiukai = 80, stop, kiekis = 0, pasirinkimas = 0;
 
-    while (true)
-    {
-        std::cout << "1 - vector, 2 - list, 3 - deque.";
-        std::cin >> pasirinkimas;
-        if (pasirinkimas < 3 || pasirinkimas < 1)
-        {
-            if (std::cin.fail())
-            {
-                try
-                {
-                    throw runtime_error("Iveskite skaiciu. ");
-                }
-                catch (const runtime_error &e)
-                {
-                    cin.clear();
-                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    cout << e.what();
-                    cout << "Pasirinkite skaiciu nuo 1 iki 3. ";
-                }
-            }
-        }
-        else if (pasirinkimas == 1)
-        {
-            std::vector<Studentas> studentai, pazenge, nepazenge;
-        }
-        else if (pasirinkimas == 2)
-        {
-            std::list<Studentas> studentai, pazenge, nepazenge;
-        }
-        else if (pasirinkimas == 3)
-        {
-            std::deque<Studentas> studentai, pazenge, nepazenge;
-        }
-    }
+    vector<Studentas> studentai, nepazenge, pazenge;
 
     while (true)
     {
@@ -195,6 +160,7 @@ int main()
                     } while (true);
 
                     vidurkis = 1.0 * std::accumulate(s.pazymiai.begin(), s.pazymiai.begin() + j, 0) / j;
+
                     s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
 
                     std::sort(s.pazymiai.begin(), s.pazymiai.begin() + j);
