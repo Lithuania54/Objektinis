@@ -13,7 +13,7 @@ int main()
     double vidurkis = 0;
     int minusiukai = 80, stop, kiekis = 0, pasirinkimas = 0;
 
-    vector<Studentas> studentai, nepazenge, pazenge;
+    deque<Studentas> studentai, nepazenge, pazenge;
 
     while (true)
     {
@@ -84,6 +84,8 @@ int main()
                         }
                     } while (!tinkami(s.pavarde));
 
+                    int j = 0;
+
                     int counter = 0;
 
                     do
@@ -98,6 +100,7 @@ int main()
                             }
                             s.pazymiai.push_back(x);
                             counter++;
+                            j++;
                         }
                         else
                         {
@@ -156,19 +159,19 @@ int main()
                         }
                     } while (true);
 
-                    vidurkis = accumulate(s.pazymiai.begin(), s.pazymiai.end(), 0.0) / s.pazymiai.size();
+                    vidurkis = 1.0 * std::accumulate(s.pazymiai.begin(), s.pazymiai.begin() + j, 0) / j;
 
                     s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
 
-                    std::sort(s.pazymiai.begin(), s.pazymiai.begin());
+                    std::sort(s.pazymiai.begin(), s.pazymiai.begin() + j);
 
-                    if (s.pazymiai.size() % 2 == 0)
+                    if (j % 2 == 0)
                     {
-                        s.mediana = (s.pazymiai[s.pazymiai.size() / 2] + s.pazymiai[(s.pazymiai.size() / 2) - 1]) / 2.0;
+                        s.mediana = (s.pazymiai[j / 2] + s.pazymiai[(j / 2) - 1]) / 2.0;
                     }
                     else
                     {
-                        s.mediana = s.pazymiai[s.pazymiai.size() / 2];
+                        s.mediana = s.pazymiai[j / 2];
                     }
 
                     kiekis++;
@@ -225,8 +228,6 @@ int main()
                     }
                 } while (!tinkami(s.pavarde));
 
-                std::vector<int>::size_type j = 0;
-
                 for (int i = 0; i < 10; i++)
                 {
                     s.pazymiai.push_back(rand() % 11);
@@ -235,7 +236,6 @@ int main()
                 s.egzaminorez = rand() % 11;
 
                 vidurkis = accumulate(s.pazymiai.begin(), s.pazymiai.end(), 0.0) / s.pazymiai.size();
-
                 s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
 
                 std::sort(s.pazymiai.begin(), s.pazymiai.begin());
@@ -311,19 +311,19 @@ int main()
                         s.egzaminorez = s.pazymiai.back();
                         s.pazymiai.pop_back();
 
-                        vidurkis = accumulate(s.pazymiai.begin(), s.pazymiai.end(), 0.0) / s.pazymiai.size();
-
+                        double vidurkis = accumulate(s.pazymiai.begin(), s.pazymiai.end(), 0.0) / s.pazymiai.size();
                         s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
 
                         std::sort(s.pazymiai.begin(), s.pazymiai.end());
+                        int j = s.pazymiai.size();
 
-                        if (s.pazymiai.size() % 2 == 0)
+                        if (j % 2 == 0)
                         {
-                            s.mediana = (s.pazymiai[s.pazymiai.size() / 2 - 1] + s.pazymiai[s.pazymiai.size() / 2]) / 2.0;
+                            s.mediana = (s.pazymiai[j / 2 - 1] + s.pazymiai[j / 2]) / 2.0;
                         }
                         else
                         {
-                            s.mediana = s.pazymiai[s.pazymiai.size() / 2];
+                            s.mediana = s.pazymiai[j / 2];
                         }
 
                         studentai.push_back(s);
@@ -457,18 +457,19 @@ int main()
                         s.egzaminorez = s.pazymiai.back();
                         s.pazymiai.pop_back();
 
-                        vidurkis = accumulate(s.pazymiai.begin(), s.pazymiai.end(), 0.0) / s.pazymiai.size();
+                        double vidurkis = accumulate(s.pazymiai.begin(), s.pazymiai.end(), 0.0) / s.pazymiai.size();
                         s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
 
                         std::sort(s.pazymiai.begin(), s.pazymiai.end());
+                        int j = s.pazymiai.size();
 
-                        if (s.pazymiai.size() % 2 == 0)
+                        if (j % 2 == 0)
                         {
-                            s.mediana = (s.pazymiai[s.pazymiai.size() / 2 - 1] + s.pazymiai[s.pazymiai.size() / 2]) / 2.0;
+                            s.mediana = (s.pazymiai[j / 2 - 1] + s.pazymiai[j / 2]) / 2.0;
                         }
                         else
                         {
-                            s.mediana = s.pazymiai[s.pazymiai.size() / 2];
+                            s.mediana = s.pazymiai[j / 2];
                         }
 
                         studentai.push_back(s);
@@ -562,34 +563,34 @@ int main()
     std::chrono::duration<double> diffe = endas - startas;
     std::cout << "Visas programos laikas: " << diffe.count() << " sekundes" << std::endl;
 
-    if (kiekis != 0)
-    {
-        std::cout.width(15);
-        std::cout << left << "Pavarde";
-        std::cout.width(15);
-        std::cout << left << "Vardas";
-        std::cout.width(23);
-        std::cout << left << "Galutinis (Vid.)";
-        std::cout.width(23);
-        std::cout << left << "Galutinis (med.)" << endl;
-        for (int i = 0; i < minusiukai; i++)
-        {
-            std::cout << "-";
-        }
-        std::cout << endl;
-    }
+    // if (kiekis != 0)
+    // {
+    //     std::cout.width(15);
+    //     std::cout << left << "Pavarde";
+    //     std::cout.width(15);
+    //     std::cout << left << "Vardas";
+    //     std::cout.width(23);
+    //     std::cout << left << "Galutinis (Vid.)";
+    //     std::cout.width(23);
+    //     std::cout << left << "Galutinis (med.)" << endl;
+    //     for (int i = 0; i < minusiukai; i++)
+    //     {
+    //         std::cout << "-";
+    //     }
+    //     std::cout << endl;
+    // }
 
-    for (int i = 0; i < kiekis; i++)
-    {
-        std::cout.width(15);
-        std::cout << left << studentai[i].pavarde;
-        std::cout.width(15);
-        std::cout << left << studentai[i].vardas;
-        std::cout.width(23);
-        std::cout << left << fixed << setprecision(2) << studentai[i].galutinis;
-        std::cout.width(23);
-        std::cout << left << fixed << setprecision(2) << studentai[i].mediana << endl;
-    }
+    // for (int i = 0; i < kiekis; i++)
+    // {
+    //     std::cout.width(15);
+    //     std::cout << left << studentai[i].pavarde;
+    //     std::cout.width(15);
+    //     std::cout << left << studentai[i].vardas;
+    //     std::cout.width(23);
+    //     std::cout << left << fixed << setprecision(2) << studentai[i].galutinis;
+    //     std::cout.width(23);
+    //     std::cout << left << fixed << setprecision(2) << studentai[i].mediana << endl;
+    // }
 
     return 0;
 }
