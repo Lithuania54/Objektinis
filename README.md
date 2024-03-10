@@ -34,7 +34,7 @@
 | failas1000000    | 2.1       | 0.25             | 1.1                 |
 | failas10000000    | 20.1       | 2.3            | 10.1                  |
 
-## Sistemos parametrai
+## Testavimo sistemos parametrai
 
 - **CPU**: 11th Gen Intel(R) Core(TM) i7-11800H 2.30GHz / 16 logical processors / 8 cores
 - **RAM**: 16GB / speed 3200MHz

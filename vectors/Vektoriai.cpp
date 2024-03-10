@@ -7,7 +7,6 @@ using namespace std;
 
 int main()
 {
-    auto startas = std::chrono::high_resolution_clock::now();
 
     srand(time(nullptr));
     double vidurkis = 0;
@@ -555,10 +554,6 @@ int main()
             }
         }
     }
-
-    auto endas = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> diffe = endas - startas;
-    std::cout << "Visas programos laikas: " << diffe.count() << " sekundes" << std::endl;
 
     if (kiekis != 0)
     {
