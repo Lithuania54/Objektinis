@@ -44,7 +44,7 @@ Programa skirta studentų duomenų apdorojimui: **įvedimui, generavimui, skaity
 | failas1000000    |    2.9    |        1.06      |         1.25         |
 | failas10000000    |     32.92   |       42.29      |          30.63         |
 
-## Spartos analizė su copy_if, erase, remove_if, bakc_inserter algoritmais
+## Spartos analizė su copy_if, erase, remove_if, back_inserter algoritmais
 
 ### Spartos analizės rezultatai VECTOR (Po 10 nd)
 
@@ -80,7 +80,18 @@ Programa skirta studentų duomenų apdorojimui: **įvedimui, generavimui, skaity
 
 Algoritmų pagalba nežymiai pagreitėjo duomenų nuskaitymas, rūšiavimas ir išvedimas į du failus **vektorių** ir **deque** konteineriuose, tačiau **list** konteineryje duomenys buvo nuskaitomi daug greičiau. Verta pridurti, kad algoritmų pagalba programa veikia efektyviau atminties atžvilgiu.
 
-### Paleidimas
+# Releasai ir paleidimas
+
+## Releasų istorija
+
+- **V.pradine**: Sukurta preliminari programa, kurioje vartotojui įvedus studentų kiekį ir studentų duomenis (vardą, pavardę, pažymius) apskaičiuoja ir atspausdina studento duomenis su galutiniu rezultatu ir mediana. 
+- **V0.1**: Programa papildyta taip, kad iš anksto nėra žinomas nei namų darbų kiekis, nei mokinių. Pridėta galimybė, jog mokinio gautieji balai už namų darbus bei egzaminą būtų generuojami atsitiktinai. Programa suskirstyta į du failus: **Masyvai.cpp** ir **Vektoriai.cpp**. **Masyvai.cpp** faile duomenys yra saugomi C masyve, o **Vektoriai.cpp** faile std::vector konteineryje. Sukurtas meniu.
+- **V0.2**: Pridėta galimybė nuskaityti duomenis iš failo ir patobulintas atspausdinimo metodas.
+- **V0.3**: Atliktas kodo reorganizavimas: struktūros perkeltos į atraštinius failus, o funkcijos į **Funkcijos.cpp** failą. Pridėtas išimčių valdymas.
+- **V0.4**: Sukurta failų generatoriaus funkcija. Studentai surūšiuojami į dvi kategorijas pagal pažymius ir išvedami į du naujus failus ( **nepazenge.txt** ir **pazenge.txt**). Atlikta programos veikimo greičio analizė.
+- **V1.0**: Atliktas konteinerių testavimas su **std::vector**, **std::list** ir **deque** konteineriais. Optimizuota programa su **copy_if, erase, remove_if, back_inserter** algoritmais. 
+
+## Paleidimas
 - Programą galite paleisti iš komandinės eilutės, nurodant reikiamus parametrus:
 *g++ -o vektoriai Vektoriai.cpp Funkcijos.cpp* ir *.\vektoriai.exe*
 *g++ -o lists Lists.cpp Funkcijos.cpp* ir *.\lists.exe*
