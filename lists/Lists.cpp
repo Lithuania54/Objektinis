@@ -560,7 +560,7 @@ int main()
                 }
                 auto end = std::chrono::high_resolution_clock::now();
                 std::chrono::duration<double> diffe = end - start;
-                std::cout << "Rusiavimas didejimo tvarka: " << diffe.count() << " sekundes" << std::endl;
+                std::cout << "Rusiavimas didejimo tvarka: " << diffe.count() << " sekundes" << std::endl;}
 
                 auto startas = std::chrono::high_resolution_clock::now();
 
@@ -584,11 +584,6 @@ int main()
                 std::cout << "Surusiavimas ir skirstymas: " << diff.count() << " sekundes" << std::endl;
 
                 break;
-            }
-            else
-            {
-                break;
-            }
         }
     }
 }
