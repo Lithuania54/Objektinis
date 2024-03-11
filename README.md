@@ -45,10 +45,3 @@ Programa skirta studentų duomenų apdorojimui: **įvedimui, generavimui, skaity
 *g++ -o vektoriai Vektoriai.cpp Funkcijos.cpp* ir *.\vektoriai.exe*
 *g++ -o lists Lists.cpp Funkcijos.cpp* ir *.\lists.exe*
 *g++ -o deque Deque.cpp Funkcijos.cpp* ir *.\deque.exe*
-
-## Nuotraukos
-![failas1000](/images/failas1000.png)
-![failas10000](/images/failas10000.png)
-![failas100000](/images/failas100000.png)
-![failas1000000](/images/failas1000000.png)
-![failas10000000](/images/failas10000000.png)
