@@ -278,7 +278,7 @@ int main()
 
             else if (stop == 4)
             {
-                string fileName = "studentai10000.txt";
+                string fileName = "failas10000000.txt";
                 try
                 {
                     yrafailas(fileName);
@@ -328,8 +328,8 @@ int main()
                     fd.close();
 
                     auto pabaiga = std::chrono::high_resolution_clock::now();
-                    std::chrono::duration<double, std::milli> elapsed = pabaiga - pradzia;
-                    std::cout << "Duomenu nuskaitymas is failo: " << elapsed.count() << " millisekundes" << std::endl;
+                    std::chrono::duration<double> elapsed = pabaiga - pradzia;
+                    std::cout << "Duomenu nuskaitymas is failo: " << elapsed.count() << " sekundes" << std::endl;
                 }
                 catch (const std::runtime_error &e)
                 {
@@ -425,8 +425,8 @@ int main()
 
                     } while (true);
 
-                    generuotiFaila(studentukiekis, "failas10000000.txt", ndkiekis);
-                    string fileName = "failas10000000.txt";
+                    generuotiFaila(studentukiekis, "failas.txt", ndkiekis);
+                    string fileName = "failas.txt";
                     yrafailas(fileName);
 
                     auto pradzia = std::chrono::high_resolution_clock::now();
