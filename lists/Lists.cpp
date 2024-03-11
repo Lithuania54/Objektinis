@@ -168,7 +168,7 @@ int main()
                     if (s.pazymiai.size() % 2 == 0)
                     {
                         auto it2 = it;
-                        --it2;
+                        std::advance(it2, -1);
                         s.mediana = (*it + *it2) / 2.0;
                     }
                     else
@@ -251,7 +251,7 @@ int main()
                 if (s.pazymiai.size() % 2 == 0)
                 {
                     auto it2 = it;
-                    --it2;
+                    std::advance(it2, -1);
                     s.mediana = (*it + *it2) / 2.0;
                 }
                 else
@@ -287,7 +287,7 @@ int main()
                 if (s.pazymiai.size() % 2 == 0)
                 {
                     auto it2 = it;
-                    --it2;
+                    std::advance(it2, -1);
                     s.mediana = (*it + *it2) / 2.0;
                 }
                 else
@@ -342,7 +342,7 @@ int main()
                         if (s.pazymiai.size() % 2 == 0)
                         {
                             auto it2 = it;
-                            --it2;
+                            std::advance(it2, -1);
                             s.mediana = (*it + *it2) / 2.0;
                         }
                         else
@@ -493,7 +493,7 @@ int main()
                         if (s.pazymiai.size() % 2 == 0)
                         {
                             auto it2 = it;
-                            --it2;
+                            std::advance(it2, -1);
                             s.mediana = (*it + *it2) / 2.0;
                         }
                         else

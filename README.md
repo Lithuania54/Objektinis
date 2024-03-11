@@ -2,7 +2,7 @@
 
 ## Aprašymas
 
-Ši sistema skirta efektyviam studentų duomenų apdorojimui: duomenų skaitymui iš failo, studentų rūšiavimui į skirtingas kategorijas pagal jų pasiekimus, ir galiausiai, surūšiuotų studentų išvedimui į naujus failus. Projektas leidžia išmatuoti ir analizuoti kiekvieno šių žingsnių veikimo laiką, taip užtikrinant sistemos veiksmingumą. Yra matuojamas failų kūrimo laikas, duomenų nuskaitymas iš failo, studentų rūšiavimas, surūšiuotų studentų išvedimas į du naujus failus, visos programos veikimo laikas. Mokiniai, kurių galutinis balas yra >= 5, patenka į `pazenge.txt` failą, o visi likę į `nepazenge.txt`.
+Programa skirta studentų duomenų apdorojimui: **įvedimui, generavimui, skaitymui iš failo, failo generavimui ir rezultatų išvedimui į failą**. Vartotojas gali pasirinkti, kaip nori pateikti studentų duomenis: įvesti ranka, generuoti atsitiktinai, skaityti iš failo, ar sukurti naują failą su atsitiktiniais duomenimis. Programa leidžia nuspręsti, kurio tipo konteinerį naudoti duomenų saugojimui: **vector, list, ar deque**. Po duomenų surinkimo, studentai yra skirstomi į dvi grupes pagal galutinį balą, o tada rezultatai išvedami į atitinkamus failus: `pazenge.txt` arba `nepazenge.txt`. Pasirinkus, rezultatai gali būti išrikiuoti pagal vardą, pavardę, galutinį vidurkį, ar medianą. Programa pateikia informaciją apie įvairių operacijų vykdymo laiką, leidžiant įvertinti efektyvumą.
 
 ## Spartos analizės rezultatai VECTOR (Po 10 nd)
 
@@ -43,6 +43,8 @@
 ## Paleidimas
 - Programą galite paleisti iš komandinės eilutės, nurodant reikiamus parametrus:
 *g++ -o vektoriai Vektoriai.cpp Funkcijos.cpp* ir *.\vektoriai.exe*
+*g++ -o lists Lists.cpp Funkcijos.cpp* ir *.\lists.exe*
+*g++ -o deque Deque.cpp Funkcijos.cpp* ir *.\deque.exe*
 
 ## Nuotraukos
 ![failas1000](/images/failas1000.png)
