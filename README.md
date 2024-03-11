@@ -95,12 +95,12 @@ Algoritmų pagalba nežymiai pagreitėjo duomenų nuskaitymas, rūšiavimas ir i
 
 ### Programos, kurias reik turėt
 
--[MinGW](https://code.visualstudio.com/docs/cpp/config-mingw) būtina turėt gcc ir g++ kompiliatorius
--[CMake](https://cmake.org/download/) versiją nuo 3.28.3
+- [MinGW](https://code.visualstudio.com/docs/cpp/config-mingw) būtina turėt gcc ir g++ kompiliatorius
+* [CMake](https://cmake.org/download/) versiją nuo 3.28.3
 
 ### Programos, kurias patartina turėt
 
--[Visual Studio Code](https://code.visualstudio.com/download)
+- [Visual Studio Code](https://code.visualstudio.com/download)
 
 ### Instrukcija
 
