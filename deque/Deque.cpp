@@ -159,7 +159,7 @@ int main()
 
                     s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
 
-                    std::sort(s.pazymiai.begin(), s.pazymiai.begin());
+                    std::sort(s.pazymiai.begin(), s.pazymiai.end());
 
                     if (s.pazymiai.size() % 2 == 0)
                     {
@@ -235,7 +235,7 @@ int main()
 
                 s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
 
-                std::sort(s.pazymiai.begin(), s.pazymiai.begin());
+                std::sort(s.pazymiai.begin(), s.pazymiai.end());
                 if (s.pazymiai.size() % 2 == 0)
                 {
                     s.mediana = (s.pazymiai[s.pazymiai.size() / 2] + s.pazymiai[(s.pazymiai.size() / 2) - 1]) / 2.0;

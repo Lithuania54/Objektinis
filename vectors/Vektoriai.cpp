@@ -12,7 +12,7 @@ int main()
     double vidurkis = 0;
     int minusiukai = 80, stop, kiekis = 0, pasirinkimas = 0;
 
-    vector<Studentas> studentai, nepazenge, pazenge;
+    vector<Studentas> studentai, nepazenge;
 
     while (true)
     {
@@ -159,7 +159,7 @@ int main()
 
                     s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
 
-                    std::sort(s.pazymiai.begin(), s.pazymiai.begin());
+                    std::sort(s.pazymiai.begin(), s.pazymiai.end());
 
                     if (s.pazymiai.size() % 2 == 0)
                     {
@@ -235,7 +235,7 @@ int main()
 
                 s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
 
-                std::sort(s.pazymiai.begin(), s.pazymiai.begin());
+                std::sort(s.pazymiai.begin(), s.pazymiai.end());
                 if (s.pazymiai.size() % 2 == 0)
                 {
                     s.mediana = (s.pazymiai[s.pazymiai.size() / 2] + s.pazymiai[(s.pazymiai.size() / 2) - 1]) / 2.0;
@@ -485,20 +485,16 @@ int main()
         if (stop == 6)
         {
             auto startas = std::chrono::high_resolution_clock::now();
-            for (Studentas &student : studentai)
-            {
-                if (student.galutinis < 5)
-                {
-                    nepazenge.push_back(student);
-                }
-                else
-                {
-                    pazenge.push_back(student);
-                }
-            }
+
+            std::copy_if(studentai.begin(), studentai.end(), std::back_inserter(nepazenge), [](const Studentas &s){
+                return s.galutinis < 5; 
+            });
+
+            studentai.erase(std::remove_if(studentai.begin(), studentai.end(), [](const Studentas &s){
+                 return s.galutinis < 5; 
+            }), studentai.end());
 
             irasytiStudentus(nepazenge, "nepazenge.txt");
-            irasytiStudentus(pazenge, "pazenge.txt");
             auto endas = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double> diffe = endas - startas;
             std::cout << "Surusiavimas ir skirstymas: " << diffe.count() << " sekundes" << std::endl;
@@ -556,34 +552,7 @@ int main()
         }
     }
 
-    // if (kiekis != 0)
-    // {
-    //     std::cout.width(15);
-    //     std::cout << left << "Pavarde";
-    //     std::cout.width(15);
-    //     std::cout << left << "Vardas";
-    //     std::cout.width(23);
-    //     std::cout << left << "Galutinis (Vid.)";
-    //     std::cout.width(23);
-    //     std::cout << left << "Galutinis (med.)" << endl;
-    //     for (int i = 0; i < minusiukai; i++)
-    //     {
-    //         std::cout << "-";
-    //     }
-    //     std::cout << endl;
-    // }
-
-    // for (int i = 0; i < kiekis; i++)
-    // {
-    //     std::cout.width(15);
-    //     std::cout << left << studentai[i].pavarde;
-    //     std::cout.width(15);
-    //     std::cout << left << studentai[i].vardas;
-    //     std::cout.width(23);
-    //     std::cout << left << fixed << setprecision(2) << studentai[i].galutinis;
-    //     std::cout.width(23);
-    //     std::cout << left << fixed << setprecision(2) << studentai[i].mediana << endl;
-    // }
+    irasytiStudentus(studentai, "studentai.txt");
 
     return 0;
 }
