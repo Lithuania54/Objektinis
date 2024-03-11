@@ -109,6 +109,6 @@ Algoritmų pagalba nežymiai pagreitėjo duomenų nuskaitymas, rūšiavimas ir i
 3. Klonuokite repozitoriją: naudodami `git clone` nukopijuokite repozitoriją į savo kompiuterį. Arba parsiųskite ZIP failą.
 4. Paleiskite `run.bat` aplikaciją.
 
-Pirmą kartą pasileidus programą programa veiks su `vektoriaus` konteineriu. Norėdami pakeisti konteinerį reiktų pakoreguoti `run.bat` failą. Jei norėtumėte paleisti programą su `list` konteineriu šias dvi eilutes `cd vectors start vektoriai.exe` reiktų pakeisti į `cd lists start lists.exe`, o jei norėtumėte paleisti programą su `deque` konteineriu, reiktų pakeisti į šais dvi: `cd deque start deque.exe`.
+* Pirmą kartą pasileidus programą programa veiks su `vektoriaus` konteineriu. Norėdami pakeisti konteinerį reiktų pakoreguoti `run.bat` failą. Jei norėtumėte paleisti programą su `list` konteineriu šias dvi eilutes `cd vectors start vektoriai.exe` reiktų pakeisti į `cd lists start lists.exe`, o jei norėtumėte paleisti programą su `deque` konteineriu, reiktų pakeisti į šais dvi: `cd deque start deque.exe`.
 
-Rezultatus galite rasti šiuo path: *build/konteinerio_tipas*
+* Rezultatus galite rasti šiuo path: *build/konteinerio_tipas*
