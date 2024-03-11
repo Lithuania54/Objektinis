@@ -484,21 +484,6 @@ int main()
         }
         if (stop == 6)
         {
-            auto startas = std::chrono::high_resolution_clock::now();
-
-            std::copy_if(studentai.begin(), studentai.end(), std::back_inserter(nepazenge), [](const Studentas &s){
-                return s.galutinis < 5; 
-            });
-
-            studentai.erase(std::remove_if(studentai.begin(), studentai.end(), [](const Studentas &s){
-                 return s.galutinis < 5; 
-            }), studentai.end());
-
-            irasytiStudentus(nepazenge, "nepazenge.txt");
-            auto endas = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<double> diffe = endas - startas;
-            std::cout << "Surusiavimas ir skirstymas: " << diffe.count() << " sekundes" << std::endl;
-
             if (kiekis > 1)
             {
                 int pasirinkimas;
@@ -540,9 +525,27 @@ int main()
                 case 5:
                     break;
                 }
+
                 auto end = std::chrono::high_resolution_clock::now();
                 std::chrono::duration<double> diffe = end - start;
                 std::cout << "Rusiavimas didejimo tvarka: " << diffe.count() << " sekundes" << std::endl;
+
+                auto startas = std::chrono::high_resolution_clock::now();
+
+                std::copy_if(studentai.begin(), studentai.end(), std::back_inserter(nepazenge), [](const Studentas &s)
+                             { return s.galutinis < 5; });
+
+                studentai.erase(std::remove_if(studentai.begin(), studentai.end(), [](const Studentas &s)
+                                               { return s.galutinis < 5; }),
+                                studentai.end());
+
+                irasytiStudentus(nepazenge, "nepazenge.txt");
+                irasytiStudentus(studentai, "studentai.txt");
+
+                auto endas = std::chrono::high_resolution_clock::now();
+                std::chrono::duration<double> diff = endas - startas;
+                std::cout << "Surusiavimas ir skirstymas: " << diff.count() << " sekundes" << std::endl;
+
                 break;
             }
             else
@@ -551,8 +554,6 @@ int main()
             }
         }
     }
-
-    irasytiStudentus(studentai, "studentai.txt");
 
     return 0;
 }

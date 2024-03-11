@@ -12,7 +12,7 @@ int main()
     double vidurkis = 0;
     int minusiukai = 80, stop, kiekis = 0, pasirinkimas = 0;
 
-    list<Studentas> studentai, nepazenge, pazenge;
+    list<Studentas> studentai, nepazenge;
 
     while (true)
     {
@@ -489,7 +489,7 @@ int main()
 
                         auto it = s.pazymiai.begin();
                         std::advance(it, s.pazymiai.size() / 2);
-                        
+
                         if (s.pazymiai.size() % 2 == 0)
                         {
                             auto it2 = it;
@@ -517,25 +517,6 @@ int main()
         }
         if (stop == 6)
         {
-            auto startas = std::chrono::high_resolution_clock::now();
-            for (Studentas &student : studentai)
-            {
-                if (student.galutinis < 5)
-                {
-                    nepazenge.push_back(student);
-                }
-                else
-                {
-                    pazenge.push_back(student);
-                }
-            }
-
-            irasytiStudentus(nepazenge, "nepazenge.txt");
-            irasytiStudentus(pazenge, "pazenge.txt");
-            auto endas = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<double> diffe = endas - startas;
-            std::cout << "Surusiavimas ir skirstymas: " << diffe.count() << " sekundes" << std::endl;
-
             if (kiekis > 1)
             {
                 int pasirinkimas;
@@ -580,6 +561,28 @@ int main()
                 auto end = std::chrono::high_resolution_clock::now();
                 std::chrono::duration<double> diffe = end - start;
                 std::cout << "Rusiavimas didejimo tvarka: " << diffe.count() << " sekundes" << std::endl;
+
+                auto startas = std::chrono::high_resolution_clock::now();
+
+                for (auto it = studentai.begin(); it != studentai.end();)
+                {
+                    if (it->galutinis < 5)
+                    {
+                        nepazenge.push_back(std::move(*it));
+                        it = studentai.erase(it);
+                    }
+                    else
+                    {
+                        ++it;
+                    }
+                }
+
+                irasytiStudentus(nepazenge, "nepazenge.txt");
+                irasytiStudentus(studentai, "studentai.txt");
+                auto endas = std::chrono::high_resolution_clock::now();
+                std::chrono::duration<double> diff = endas - startas;
+                std::cout << "Surusiavimas ir skirstymas: " << diff.count() << " sekundes" << std::endl;
+
                 break;
             }
             else
@@ -588,33 +591,4 @@ int main()
             }
         }
     }
-
-    // if (kiekis != 0)
-    // {
-    //     std::cout.width(15);
-    //     std::cout << left << "Pavarde";
-    //     std::cout.width(15);
-    //     std::cout << left << "Vardas";
-    //     std::cout.width(23);
-    //     std::cout << left << "Galutinis (Vid.)";
-    //     std::cout.width(23);
-    //     std::cout << left << "Galutinis (med.)" << endl;
-    //     for (int i = 0; i < minusiukai; i++)
-    //     {
-    //         std::cout << "-";
-    //     }
-    //     std::cout << endl;
-    // }
-
-    // for (const auto &student : studentai)
-    // {
-    //     std::cout.width(15);
-    //     std::cout << left << student.pavarde;
-    //     std::cout.width(15);
-    //     std::cout << left << student.vardas;
-    //     std::cout.width(23);
-    //     std::cout << left << fixed << setprecision(2) << student.galutinis;
-    //     std::cout.width(23);
-    //     std::cout << left << fixed << setprecision(2) << student.mediana << endl;
-    // }
 }
