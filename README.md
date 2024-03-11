@@ -92,7 +92,23 @@ Algoritmų pagalba nežymiai pagreitėjo duomenų nuskaitymas, rūšiavimas ir i
 - **V1.0**: Atliktas konteinerių testavimas su `std::vector`, `std::list` ir `deque` konteineriais. Optimizuota programa su `copy_if, erase, remove_if, back_inserter` algoritmais. 
 
 ## Paleidimas
-- Programą galite paleisti iš komandinės eilutės, nurodant reikiamus parametrus:
-*g++ -o vektoriai Vektoriai.cpp Funkcijos.cpp* ir *.\vektoriai.exe*
-*g++ -o lists Lists.cpp Funkcijos.cpp* ir *.\lists.exe*
-*g++ -o deque Deque.cpp Funkcijos.cpp* ir *.\deque.exe*
+
+### Programos, kurias reik turėt
+
+-[MinGW](https://code.visualstudio.com/docs/cpp/config-mingw) būtina turėt gcc ir g++ kompiliatorius
+-[CMake](https://cmake.org/download/) versiją nuo 3.28.3
+
+### Programos, kurias patartina turėt
+
+-[Visual Studio Code](https://code.visualstudio.com/download)
+
+### Instrukcija
+
+1. Įsidiekite C++ kompiliatorių: pasinaudokit `MinGW` tutorialu.
+2. Įsidiekite CMake: pasianudokit `CMake` tutorialu.
+3. Klonuokite repozitoriją: naudodami `git clone` nukopijuokite repozitoriją į savo kompiuterį. Arba parsiųskite ZIP failą.
+4. Paleiskite `run.bat` aplikaciją.
+
+Pirmą kartą pasileidus programą programa veiks su `vektoriaus` konteineriu. Norėdami pakeisti konteinerį reiktų pakoreguoti `run.bat` failą. Jei norėtumėte paleisti programą su `list` konteineriu šias dvi eilutes `cd vectors start vektoriai.exe` reiktų pakeisti į `cd lists start lists.exe`, o jei norėtumėte paleisti programą su `deque` konteineriu, reiktų pakeisti į šais dvi: `cd deque start deque.exe`.
+
+Rezultatus galite rasti šiuo path: *build/konteinerio_tipas*

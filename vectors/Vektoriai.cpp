@@ -278,7 +278,7 @@ int main()
 
             else if (stop == 4)
             {
-                string fileName = "failas10000000.txt";
+                string fileName = "failas.txt";
                 try
                 {
                     yrafailas(fileName);
@@ -425,8 +425,8 @@ int main()
 
                     } while (true);
 
-                    generuotiFaila(studentukiekis, "failas100000.txt", ndkiekis);
-                    string fileName = "failas100000.txt";
+                    generuotiFaila(studentukiekis, "failas.txt", ndkiekis);
+                    string fileName = "failas.txt";
                     yrafailas(fileName);
 
                     auto pradzia = std::chrono::high_resolution_clock::now();
