@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
-#include "Studentas.h"
-#include "Funkcijos.h"
+#include "Studentasdeque.h"
+#include "Funkcijosdeque.h"
 #include <chrono>
 
 using namespace std;

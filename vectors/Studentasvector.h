@@ -1,11 +1,11 @@
-#ifndef STUDENTAS_H
-#define STUDENTAS_H
+#ifndef STUDENTASVECTOR_H
+#define STUDENTASVECTOR_H
 
 struct Studentas
 {
     std::string vardas, pavarde;
     int egzaminorez;
-    std::list<int> pazymiai;
+    std::vector<int> pazymiai;
     double galutinis, mediana;
 };
 

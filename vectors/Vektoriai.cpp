@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
-#include "Studentas.h"
-#include "Funkcijos.h"
+#include "Studentasvector.h"
+#include "Funkcijosvector.h"
 #include <chrono>
 
 using namespace std;
@@ -425,8 +425,8 @@ int main()
 
                     } while (true);
 
-                    generuotiFaila(studentukiekis, "failas.txt", ndkiekis);
-                    string fileName = "failas.txt";
+                    generuotiFaila(studentukiekis, "failas100000.txt", ndkiekis);
+                    string fileName = "failas100000.txt";
                     yrafailas(fileName);
 
                     auto pradzia = std::chrono::high_resolution_clock::now();

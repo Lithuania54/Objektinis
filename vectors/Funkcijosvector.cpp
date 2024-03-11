@@ -1,4 +1,4 @@
-#include "Funkcijos.h"
+#include "Funkcijosvector.h"
 #include <cctype>
 #include <cstdlib>
 #include <ctime>
@@ -7,9 +7,9 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
-#include <deque>
+#include <vector>
 #include <chrono>
-#include "Studentas.h"
+#include "Studentasvector.h"
 
 bool tinkami(const std::string &name)
 {
@@ -69,7 +69,7 @@ void generuotiFaila(int zmoniusk, const std::string &failopavadinimas, int ndkie
     outFile.close();
 }
 
-void irasytiStudentus(const std::deque<Studentas> &studentai, const std::string &failoVardas)
+void irasytiStudentus(const std::vector<Studentas> &studentai, const std::string &failoVardas)
 {
     std::ofstream outFile(failoVardas);
     outFile << std::left << std::setw(20) << "Vardas" << std::setw(20) << "Pavarde" << std::setw(20) << "Galutinis"

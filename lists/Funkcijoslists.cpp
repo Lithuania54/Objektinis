@@ -1,4 +1,4 @@
-#include "Funkcijos.h"
+#include "Funkcijoslists.h"
 #include <cctype>
 #include <cstdlib>
 #include <ctime>
@@ -9,7 +9,7 @@
 #include <iomanip>
 #include <list>
 #include <chrono>
-#include "Studentas.h"
+#include "Studentaslists.h"
 
 bool tinkami(const std::string &name)
 {

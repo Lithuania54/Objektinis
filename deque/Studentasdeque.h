@@ -1,5 +1,5 @@
-#ifndef STUDENTAS_H
-#define STUDENTAS_H
+#ifndef STUDENTASDEQUE_H
+#define STUDENTASDEQUE_H
 
 #include <deque>
 #include <string>
