@@ -92,7 +92,7 @@ int main()
 
             if (Masyvas[i].kiekis % 2 == 0)
             {
-                Masyvas[i].mediana = (Masyvas[i].pazymiai[Masyvas[i].kiekis / 2] + Masyvas[i].pazymiai[(Masyvas[i].kiekis / 2) - 1]) / 2;
+                Masyvas[i].mediana = 1.0 * (Masyvas[i].pazymiai[Masyvas[i].kiekis / 2] + Masyvas[i].pazymiai[(Masyvas[i].kiekis / 2) - 1]) / 2;
             }
 
             else
