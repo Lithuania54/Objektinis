@@ -159,8 +159,7 @@ int main()
 
                     s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
 
-                    studentai.sort([](const Studentas &a, const Studentas &b)
-                                   { return a.galutinis < b.galutinis; });
+                    s.pazymiai.sort();
 
                     auto it = s.pazymiai.begin();
                     std::advance(it, s.pazymiai.size() / 2);
@@ -242,9 +241,8 @@ int main()
                 vidurkis = 1.0 * std::accumulate(s.pazymiai.begin(), s.pazymiai.end(), 0.0) / s.pazymiai.size();
 
                 s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
-
-                studentai.sort([](const Studentas &a, const Studentas &b)
-                               { return a.galutinis < b.galutinis; });
+                
+                s.pazymiai.sort();
 
                 auto it = s.pazymiai.begin();
                 std::advance(it, s.pazymiai.size() / 2);
@@ -278,8 +276,7 @@ int main()
 
                 s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
 
-                studentai.sort([](const Studentas &a, const Studentas &b)
-                               { return a.galutinis < b.galutinis; });
+                s.pazymiai.sort();
 
                 auto it = s.pazymiai.begin();
                 std::advance(it, s.pazymiai.size() / 2);
@@ -332,10 +329,9 @@ int main()
 
                         vidurkis = 1.0 * std::accumulate(s.pazymiai.begin(), s.pazymiai.end(), 0.0) / s.pazymiai.size();
                         s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
-
-                        studentai.sort([](const Studentas &a, const Studentas &b)
-                                       { return a.galutinis < b.galutinis; });
-
+                        
+                        s.pazymiai.sort();
+   
                         auto it = s.pazymiai.begin();
                         std::advance(it, s.pazymiai.size() / 2);
 
@@ -484,8 +480,7 @@ int main()
                         vidurkis = 1.0 * std::accumulate(s.pazymiai.begin(), s.pazymiai.end(), 0.0) / s.pazymiai.size();
                         s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
 
-                        studentai.sort([](const Studentas &a, const Studentas &b)
-                                       { return a.galutinis < b.galutinis; });
+                        s.pazymiai.sort();
 
                         auto it = s.pazymiai.begin();
                         std::advance(it, s.pazymiai.size() / 2);
