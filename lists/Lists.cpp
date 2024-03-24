@@ -556,9 +556,9 @@ int main()
                 std::cout << "Rusiavimas didejimo tvarka: " << diffe.count() << " sekundes" << std::endl;
             }
 
-            Strategija1(studentai);
+            //Strategija1(studentai);
             //Strategija2(studentai);
-            //Strategija3(studentai);
+            Strategija3(studentai);
 
             break;
         }

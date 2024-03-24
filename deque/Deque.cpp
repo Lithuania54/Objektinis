@@ -530,21 +530,9 @@ int main()
                 std::cout << "Rusiavimas didejimo tvarka: " << diffe.count() << " sekundes" << std::endl;
             }
 
-            auto startas = std::chrono::high_resolution_clock::now();
-
-            std::copy_if(studentai.begin(), studentai.end(), std::back_inserter(nepazenge), [](const Studentas &s)
-                         { return s.galutinis < 5; });
-
-            studentai.erase(std::remove_if(studentai.begin(), studentai.end(), [](const Studentas &s)
-                                           { return s.galutinis < 5; }),
-                            studentai.end());
-
-            irasytiStudentus(nepazenge, "nepazenge.txt");
-            irasytiStudentus(studentai, "studentai.txt");
-
-            auto endas = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<double> diff = endas - startas;
-            std::cout << "Surusiavimas ir skirstymas: " << diff.count() << " sekundes" << std::endl;
+            //Strategija1(studentai);
+            //Strategija2(studentai);
+            Strategija3(studentai);
 
             break;
         }

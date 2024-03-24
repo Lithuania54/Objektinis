@@ -1,8 +1,6 @@
 #ifndef FUNKCIJOSVECTOR_H
 #define FUNKCIJOSVECOTR_H
 
-#include <string>
-#include <vector>
 #include "Studentasvector.h"
 
 bool tinkami(const std::string &name);

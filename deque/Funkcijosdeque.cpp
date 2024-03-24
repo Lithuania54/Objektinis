@@ -1,14 +1,4 @@
 #include "Funkcijosdeque.h"
-#include <cctype>
-#include <cstdlib>
-#include <ctime>
-#include <fstream>
-#include <stdexcept>
-#include <iostream>
-#include <string>
-#include <iomanip>
-#include <deque>
-#include <chrono>
 #include "Studentasdeque.h"
 
 bool tinkami(const std::string &name)
@@ -81,4 +71,72 @@ void irasytiStudentus(const std::deque<Studentas> &studentai, const std::string 
                 << std::left << std::setw(10) << std::fixed << std::setprecision(2) << studentas.galutinis << "\n";
     }
     outFile.close();
+}
+
+void Strategija1(std::deque<Studentas> &studentai)
+{
+    std::deque<Studentas> pazenge, nepazenge;
+
+    auto starta = std::chrono::high_resolution_clock::now();
+    for (Studentas &student : studentai)
+    {
+        if (student.galutinis < 5)
+        {
+            nepazenge.push_back(student);
+        }
+        else
+        {
+            pazenge.push_back(student);
+        }
+    }
+    auto ending = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> differ = ending - starta;
+    std::cout << "Skirstymas (Strategija1): " << differ.count() << " sekundes" << std::endl;
+
+    irasytiStudentus(nepazenge, "nepazenge.txt");
+    irasytiStudentus(pazenge, "pazenge.txt");
+}
+
+void Strategija2(std::deque<Studentas> &studentai)
+{
+    std::deque<Studentas> nepazenge;
+
+    auto starta = std::chrono::high_resolution_clock::now();
+    for (Studentas &student : studentai)
+    {
+        if (student.galutinis < 5)
+        {
+            nepazenge.push_back(student);
+        }
+    }
+
+    studentai.erase(std::remove_if(studentai.begin(), studentai.end(), [](const Studentas &s)
+                                   { return s.galutinis < 5; }),
+                    studentai.end());
+
+    auto ending = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> differ = ending - starta;
+    std::cout << "Skirstymas (Strategija2): " << differ.count() << " sekundes" << std::endl;
+
+    irasytiStudentus(nepazenge, "nepazenge.txt");
+    irasytiStudentus(studentai, "studentai.txt");
+}
+
+void Strategija3(std::deque<Studentas> &studentai)
+{
+
+    auto startas = std::chrono::high_resolution_clock::now();
+
+    std::deque<Studentas> nepazenge;
+    std::copy_if(studentai.begin(), studentai.end(), std::back_inserter(nepazenge), [](const Studentas &s)
+                 { return s.galutinis < 5; });
+
+    studentai.erase(std::remove_if(studentai.begin(), studentai.end(), [](const Studentas &s)
+                                   { return s.galutinis < 5; }),
+                    studentai.end());
+    auto endas = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> diff = endas - startas;
+    std::cout << "Skirstymas (Strategija3): " << diff.count() << " sekundes" << std::endl;
+    irasytiStudentus(nepazenge, "nepazenge.txt");
+    irasytiStudentus(studentai, "studentai.txt");
 }
