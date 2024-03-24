@@ -28,11 +28,11 @@ Programa skirta studentų duomenų apdorojimui: `įvedimui, generavimui, skaitym
 
 | Failo dydis | Duomenų skaitymas (s) | Rūšiavimas (s) | Išvedimas į du failus (s)|
 |-------------|----------------|----------------------|---------------------------|
-| failas1000    |     0.005  |          0.0001    |     0.003    |
-| failas10000    |     5.54   |       0.002     |          0.02       |
-| failas100000    |     952.03   |       0.04      |         0.24      |
-| failas1000000    |    ----    |       ----       |        ----          |
-| failas10000000    |    ----    |       ----      |         ----          |
+| failas1000    |     0.004  |          0.0001    |     0.002    |
+| failas10000    |     0.004   |       0.002     |          0.01       |
+| failas100000    |     0.04   |       0.03      |         0.12      |
+| failas1000000    |    4.18    |       0.67       |        1.72          |
+| failas10000000    |    42.95    |       30.27      |         188.39          |
 
 ### Spartos analizės rezultatai DEQUE (Po 10 nd)
 
@@ -60,11 +60,11 @@ Programa skirta studentų duomenų apdorojimui: `įvedimui, generavimui, skaitym
 
 | Failo dydis | Duomenų skaitymas (s) | Rūšiavimas (s) | Išvedimas į du failus (s)|
 |-------------|----------------|----------------------|---------------------------|
-| failas1000    |     0.004  |          0.0001    |     0.003    |
-| failas10000    |     5.63   |       0.001     |          0.01       |
-| failas100000    |     802.4   |       0.03      |         0.11      |
-| failas1000000    |    ----    |       ----       |        ----          |
-| failas10000000    |    ----    |       ----      |         ----          |
+| failas1000    |     0.004  |          0.0001    |     0.002    |
+| failas10000    |     0.004   |       0.002     |          0.01       |
+| failas100000    |     0.04   |       0.03      |         0.12      |
+| failas1000000    |    4.23    |       0.67       |        1.33          |
+| failas10000000    |    40.78    |       11.88      |         12.22          |
 
 ### Spartos analizės rezultatai DEQUE (Po 10 nd)
 

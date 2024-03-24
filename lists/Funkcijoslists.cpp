@@ -1,14 +1,4 @@
 #include "Funkcijoslists.h"
-#include <cctype>
-#include <cstdlib>
-#include <ctime>
-#include <fstream>
-#include <stdexcept>
-#include <iostream>
-#include <string>
-#include <iomanip>
-#include <list>
-#include <chrono>
 #include "Studentaslists.h"
 
 bool tinkami(const std::string &name)
@@ -81,4 +71,73 @@ void irasytiStudentus(const std::list<Studentas> &studentai, const std::string &
                 << std::left << std::setw(10) << std::fixed << std::setprecision(2) << studentas.galutinis << "\n";
     }
     outFile.close();
+}
+
+void Strategija1(std::list<Studentas> &studentai)
+{
+    std::list<Studentas> pazenge, nepazenge;
+
+    auto starta = std::chrono::high_resolution_clock::now();
+    for (Studentas &student : studentai)
+    {
+        if (student.galutinis < 5)
+        {
+            nepazenge.push_back(student);
+        }
+        else
+        {
+            pazenge.push_back(student);
+        }
+    }
+    auto ending = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> differ = ending - starta;
+    std::cout << "Skirstymas (Strategija1): " << differ.count() << " sekundes" << std::endl;
+
+    irasytiStudentus(nepazenge, "nepazenge.txt");
+    irasytiStudentus(pazenge, "pazenge.txt");
+}
+
+void Strategija2(std::list<Studentas> &studentai) {
+    std::list<Studentas> nepazenge;
+
+    auto starta = std::chrono::high_resolution_clock::now();
+    for (const Studentas &student : studentai) {
+        if (student.galutinis < 5) {
+            nepazenge.push_back(student);
+        }
+    }
+
+    studentai.remove_if([](const Studentas &s) { return s.galutinis < 5; });
+
+    auto ending = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> differ = ending - starta;
+    std::cout << "Skirstymas (Strategija2): " << differ.count() << "sekundes" << std::endl;
+
+    irasytiStudentus(nepazenge, "nepazenge.txt");
+    irasytiStudentus(studentai, "studentai.txt");
+}
+
+void Strategija3(std::list<Studentas> &studentai)
+{
+    std::list<Studentas> nepazenge;
+    auto startas = std::chrono::high_resolution_clock::now();
+
+    for (auto it = studentai.begin(); it != studentai.end();)
+    {
+        if (it->galutinis < 5)
+        {
+            nepazenge.push_back(std::move(*it));
+            it = studentai.erase(it);
+        }
+        else
+        {
+            ++it;
+        }
+    }
+
+    auto endas = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> diff = endas - startas;
+    std::cout << "Surusiavimas ir skirstymas: " << diff.count() << " sekundes" << std::endl;
+    irasytiStudentus(nepazenge, "nepazenge.txt");
+    irasytiStudentus(studentai, "studentai.txt");
 }

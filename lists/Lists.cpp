@@ -1,7 +1,5 @@
-#include <bits/stdc++.h>
 #include "Studentaslists.h"
 #include "Funkcijoslists.h"
-#include <chrono>
 
 using namespace std;
 
@@ -241,7 +239,7 @@ int main()
                 vidurkis = 1.0 * std::accumulate(s.pazymiai.begin(), s.pazymiai.end(), 0.0) / s.pazymiai.size();
 
                 s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
-                
+
                 s.pazymiai.sort();
 
                 auto it = s.pazymiai.begin();
@@ -329,9 +327,9 @@ int main()
 
                         vidurkis = 1.0 * std::accumulate(s.pazymiai.begin(), s.pazymiai.end(), 0.0) / s.pazymiai.size();
                         s.galutinis = 0.4 * vidurkis + 0.6 * s.egzaminorez;
-                        
+
                         s.pazymiai.sort();
-   
+
                         auto it = s.pazymiai.begin();
                         std::advance(it, s.pazymiai.size() / 2);
 
@@ -555,30 +553,14 @@ int main()
                 }
                 auto end = std::chrono::high_resolution_clock::now();
                 std::chrono::duration<double> diffe = end - start;
-                std::cout << "Rusiavimas didejimo tvarka: " << diffe.count() << " sekundes" << std::endl;}
+                std::cout << "Rusiavimas didejimo tvarka: " << diffe.count() << " sekundes" << std::endl;
+            }
 
-                auto startas = std::chrono::high_resolution_clock::now();
+            Strategija1(studentai);
+            //Strategija2(studentai);
+            //Strategija3(studentai);
 
-                for (auto it = studentai.begin(); it != studentai.end();)
-                {
-                    if (it->galutinis < 5)
-                    {
-                        nepazenge.push_back(std::move(*it));
-                        it = studentai.erase(it);
-                    }
-                    else
-                    {
-                        ++it;
-                    }
-                }
-
-                irasytiStudentus(nepazenge, "nepazenge.txt");
-                irasytiStudentus(studentai, "studentai.txt");
-                auto endas = std::chrono::high_resolution_clock::now();
-                std::chrono::duration<double> diff = endas - startas;
-                std::cout << "Surusiavimas ir skirstymas: " << diff.count() << " sekundes" << std::endl;
-
-                break;
+            break;
         }
     }
 }
